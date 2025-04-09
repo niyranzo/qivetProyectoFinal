@@ -1,8 +1,5 @@
 import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-import { User } from '../models/index.js';
 
 dotenv.config();
 
@@ -39,14 +36,6 @@ const testConnection = async () => {
 // Función para inicializar tablas
 const initDatabase = async (force = false) => {
     try {
-      let models;
-      try {
-        models = require('../models');
-      } catch (err) {
-        console.error('❌ Error al importar modelos:', err);
-        process.exit(1);
-      }
-      
       await sequelize.sync({ force });
       console.log('✅ Base de datos inicializada correctamente.');
       return true;
