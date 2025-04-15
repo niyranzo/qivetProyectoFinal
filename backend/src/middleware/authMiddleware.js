@@ -6,7 +6,7 @@ const authMiddleware = async (req, res, next) => {
         // extraemos el token
         const token = req.cookie.token;
         if(!token){
-            return res.status(402).json({messaje:"Acceso Denegado"});
+            return res.status(402).json({mes});
         }
         // verificar el token
         const verified = jwt.verify(token, process.env.JWT_SECRET);

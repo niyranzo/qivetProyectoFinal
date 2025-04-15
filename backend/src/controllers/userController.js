@@ -21,17 +21,6 @@ export const getUserById = async (req, res) => {
   }
 };
 
-// Crear un nuevo usuario
-export const createUser = async (req, res) => {
-  try {
-    const { type, name, lastname, email, phone } = req.body;
-    const newUser = await User.create({ type, name, lastname, email, phone });
-    res.status(201).json(newUser);
-  } catch (error) {
-    res.status(500).json({ error: 'Error al crear el usuario' });
-  }
-};
-
 // Actualizar un usuario
 export const updateUser = async (req, res) => {
   try {
@@ -57,3 +46,21 @@ export const deleteUser = async (req, res) => {
     res.status(500).json({ error: 'Error al eliminar el usuario' });
   }
 };
+
+// Obtener el perfil de un usuario
+export const getUserProfile = async (req, res) => {
+  try {
+      const user = await User.findByPk(req.userId, {
+          attributes: ['id', 'username'] // Excluye 'password'
+      });
+
+      if (!user) {
+          return res.status(404).json({ mensaje: "El usuario no existe" });
+      }
+
+      res.json(user); // O si quieres un objeto específico: { id: user.id, username: user.username }
+  } catch (error) {
+      console.error(error);
+      res.status(400).json({ mensaje: "Error al obtener el perfil del usuario" });
+  }
+}

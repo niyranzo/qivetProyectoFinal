@@ -1,5 +1,7 @@
 import express from 'express';
 import cors from 'cors';
+import userRouter from "./routers/userRouter.js";
+import authRouter from "./routers/authRouter.js";
 
 const app = express();
 
@@ -16,7 +18,8 @@ app.get('/', (req, res) => {
 // Importar rutas
 // import usuarioRoutes from './routes/usuario.routes.js';
 // import animalRoutes from './routes/animal.routes.js';
-// app.use('/api/usuarios', usuarioRoutes);
+app.use('/api/user', userRouter);
+app.use('/api/auth', authRouter);
 // app.use('/api/animales', animalRoutes);
 
 export default app;  // Exportamos la instancia de Express

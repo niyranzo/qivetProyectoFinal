@@ -7,46 +7,48 @@ services:
       - "3000:3000"
     depends_on:
       postgres:
-        condition: service_healthy  # Espera a que PostgreSQL esté listo
+        condition: service_healthy
     environment:
       - DB_HOST=postgres
       - DB_PORT=5432
       - DB_NAME=qivet_db
       - DB_USER=admin
-      - DB_PASSWORD=admin  # Asegúrate de que coincide con POSTGRES_PASSWORD en postgres
+      - DB_PASSWORD=admin
     networks:
       - backend_network
-    restart: on-failure  # Evita bucles infinitos si hay errores
+    restart: on-failure
 
   postgres:
     image: postgres:latest
     container_name: qivet_postgres
     environment:
       POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin  # Debe coincidir con DB_PASSWORD en backend
+      POSTGRES_PASSWORD: admin
       POSTGRES_DB: qivet_db
     networks:
       - backend_network
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    restart: unless-stopped  # Evita reinicios constantes si hay errores críticos
+    restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U admin -d qivet_db"]
       interval: 5s
       retries: 5
       timeout: 3s
 
-  adminer:
-    image: adminer
-    container_name: qivet_adminer
+  pgweb:
+    image: sosedoff/pgweb
+    container_name: qivet_pgweb
+    ports:
+      - "8080:8081"
+    environment:
+      - PGWEB_DB=postgres://admin:admin@postgres:5432/qivet_db?sslmode=disable
     networks:
       - backend_network
-    ports:
-      - "8080:8080"
     depends_on:
       postgres:
         condition: service_healthy
-    restart: unless-stopped  # No siempre es necesario reiniciar
+    restart: unless-stopped
 
 volumes:
   postgres_data:

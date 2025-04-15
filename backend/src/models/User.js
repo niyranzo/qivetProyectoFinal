@@ -30,6 +30,10 @@ const User = sequelize.define('User', {
   },
   phone: {
     type: DataTypes.STRING(20)
+  },
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false
   }
 }, {
   tableName: 'Users',
