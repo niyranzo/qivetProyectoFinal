@@ -4,6 +4,7 @@ import RootLayout from "../layouts/RootLayout";
 import ErrorPage from "../pages/ErrorPage";
 import Home from "../pages/Home";
 import { ROUTES } from "./path";
+import Contact from "../pages/Contact";
 // const url = import.meta.env.VITE_API_URL;
 // const pokemonUrl = import.meta.env.VITE_POKEMON;
 
@@ -17,11 +18,11 @@ export const router = createBrowserRouter([
             {
                 path: ROUTES.HOME, // === "/"
                 element: <Home />
-            }
-        //     {
-        //         path: ROUTES.SEARCH, // === "/search"
-        //         element: <SearchPage />
-        //     },
+            },
+            {
+                path: ROUTES.CONTACT, // === "/contact"
+                element: <Contact />
+            },
         //     {
         //         path: ROUTES.FAVORITES, // === "/favourites"
         //         element: <FavoritesPage />

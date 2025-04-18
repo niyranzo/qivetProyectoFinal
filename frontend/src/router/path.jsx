@@ -1,6 +1,6 @@
 export const ROUTES = {
     HOME: '/',
-    // SEARCH: '/search',
+    CONTACT: '/contact',
     // FAVORITES: '/favorites',
     // POKEMON_DETAILS: '/search/:name',
     // ABOUT:'/about',
