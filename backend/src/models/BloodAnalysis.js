@@ -20,7 +20,7 @@ const BloodAnalysis = sequelize.define('BloodAnalysis', {
     allowNull: false
   },
   report_pdf: {
-    type: DataTypes.BLOB,
+    type: DataTypes.STRING(255),
     allowNull: false
   }
 }, {

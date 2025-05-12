@@ -20,11 +20,11 @@ const ImageDiagnostic = sequelize.define('ImageDiagnostic', {
     allowNull: false
   },
   report_pdf: {
-    type: DataTypes.BLOB,
+    type: DataTypes.STRING(255),
     allowNull: false
   },
   image: {
-    type: DataTypes.BLOB,
+    type: DataTypes.STRING(255),
     allowNull: false
   }
 }, {

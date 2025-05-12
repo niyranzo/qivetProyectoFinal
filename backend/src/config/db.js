@@ -34,7 +34,7 @@ const testConnection = async () => {
 };
 
 // Función para inicializar tablas
-const initDatabase = async (force = false) => {
+const initDatabase = async (force = true) => {
     try {
       await sequelize.sync({ force });
       console.log('✅ Base de datos inicializada correctamente.');

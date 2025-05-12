@@ -8,6 +8,9 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+    volumes:
+      - ./public/images:/app/public/images
+      - ./public/pdfs:/app/public/pdfs
     environment:
       - DB_HOST=postgres
       - DB_PORT=5432

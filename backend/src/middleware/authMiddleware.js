@@ -3,10 +3,13 @@ import jwt from "jsonwebtoken";
 
 const authMiddleware = async (req, res, next) => {
     try {
+        console.log("TOKEN:", req.cookies.token);
+        console.log("JWT_SECRET:", process.env.JWT_SECRET);
+
         // extraemos el token
-        const token = req.cookie.token;
+        const token = req.cookies.token;
         if(!token){
-            return res.status(402).json({mes});
+            return res.status(401).json({ mensaje: 'No se proporcionó token' });
         }
         // verificar el token
         const verified = jwt.verify(token, process.env.JWT_SECRET);

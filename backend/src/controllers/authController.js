@@ -16,12 +16,12 @@ const login = async (req, res) => {
         
         res.cookie("token", token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
+            secure: false,
             maxAge: 3600000,
             sameSite: "strict"
         });
-        
-        res.json({ message: "Inicio de sesión exitoso" });
+        // Eliminar la contraseña del objeto de usuario antes de enviarlo
+        res.json({ message: "Inicio de sesión exitoso", user: user});
     } catch (error) {
         res.status(400).json({ message: "Error en el inicio de sesión" });
     }

@@ -10,7 +10,8 @@ const startServer = async () => {
       console.log("✅ Conexión a la base de datos exitosa.");
       
       // Sync all models
-      await sequelize.sync({ force: true }) // force:true will drop existing tables
+      // await sequelize.sync({ force: true }) // force:true will drop existing tables
+      await sequelize.sync()
         .then(() => {
           console.log('✅ Tablas sincronizadas correctamente.');
           console.log('Modelos registrados:', Object.keys(models));

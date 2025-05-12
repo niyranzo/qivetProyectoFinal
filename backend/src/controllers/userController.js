@@ -51,7 +51,7 @@ export const deleteUser = async (req, res) => {
 export const getUserProfile = async (req, res) => {
   try {
       const user = await User.findByPk(req.userId, {
-          attributes: ['id', 'username'] // Excluye 'password'
+          attributes: ['id_user', 'name', 'lastname', 'email', 'phone', 'type']
       });
 
       if (!user) {

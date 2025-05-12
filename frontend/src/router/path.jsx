@@ -1,7 +1,11 @@
 export const ROUTES = {
     HOME: '/',
     CONTACT: '/contact',
-    // FAVORITES: '/favorites',
-    // POKEMON_DETAILS: '/search/:name',
-    // ABOUT:'/about',
+    LOGIN: '/login',
+    USER: '/user',
+    ADMIN: '/admin',
+    ANIMAL: '/animal/:id',
+    DIAGNOSTIC: '/animal/:id/diagnostic', 
+    ANALYSIS: '/animal/:id/analysis', 
+    VACCINATION: '/animal/:id/vaccination', 
 }

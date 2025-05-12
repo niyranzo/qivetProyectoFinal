@@ -19,10 +19,13 @@ const Animal = sequelize.define('Animal', {
     type: DataTypes.STRING(100),
     allowNull: false
   },
+  photo: {
+  type: DataTypes.STRING(255), 
+  },
   species: {
     type: DataTypes.STRING(50)
   },
-  breed: {
+  race: {
     type: DataTypes.STRING(50)
   },
   age: {
