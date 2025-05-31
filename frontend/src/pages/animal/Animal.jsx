@@ -84,56 +84,60 @@ const Animal = () => {
     }
   };
 
-
   return (
-    <div className='mt-40'>
+    <div className='mt-40 px-4 md:px-0'>
       {loading ? (
         <Spinner />
       ) : (
         <>
           <div className='flex flex-col justify-center'>
-            <div className='flex justify-center gap-20'>
-              <div className='flex flex-col items-center justify-center'>
+            {/* Pet Header Section - Responsive */}
+            <div className='flex flex-col lg:flex-row justify-center items-center gap-8 lg:gap-20 mb-8'>
+              {/* Pet Info Section */}
+              <div className='flex flex-col items-center justify-center order-2 lg:order-1'>
                 <div className='flex flex-col items-center justify-center mb-5'>
-                  <h1 className='text-5xl font-bold mb-2'>{pet?.name}</h1>
-                  <hr className='bg-gradient-to-r from-pinkLigth to-aquamarine h-2 border-0 rounded-2xl w-100' />
+                  <h1 className='text-3xl sm:text-4xl lg:text-5xl font-bold mb-2 text-center'>{pet?.name}</h1>
+                  <hr className='bg-gradient-to-r from-pinkLigth to-aquamarine h-2 border-0 rounded-2xl w-60 sm:w-80 lg:w-100' />
                 </div>
-                <div className='flex flex-col w-lg items-center rounded-xl shadow-lg shadow-gray-500 py-2'>
-                  <p className='border-b-2 border-b-purple-600 px-4 text-3xl font-bold mb-5'>Mis Datos</p>
-                  <div className='grid grid-cols-2 gap-4 w-full px-6 pb-4'>
+                <div className='flex flex-col w-full max-w-md lg:w-lg items-center rounded-xl shadow-lg shadow-gray-500 py-4'>
+                  <p className='border-b-2 border-b-purple-600 px-4 text-xl sm:text-2xl lg:text-3xl font-bold mb-5'>Mis Datos</p>
+                  <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 w-full px-6 pb-4'>
                     <div className='flex flex-col items-center'>
-                      <p className='text-xl font-bold'>Especie</p>
-                      <p>{pet.species}</p>  
+                      <p className='text-lg sm:text-xl font-bold'>Especie</p>
+                      <p className='text-sm sm:text-base text-center'>{pet.species}</p>  
                     </div>
                     <div className='flex flex-col items-center'>
-                      <p className='text-xl font-bold'>Edad</p>
-                      <p>{pet.age}</p>
+                      <p className='text-lg sm:text-xl font-bold'>Edad</p>
+                      <p className='text-sm sm:text-base text-center'>{pet.age}</p>
                     </div>
-                    <div className='col-span-2 flex flex-col items-center'>
-                      <p className='text-xl font-bold'>Raza</p>
-                      <p>{pet.race}</p>
+                    <div className='sm:col-span-2 flex flex-col items-center'>
+                      <p className='text-lg sm:text-xl font-bold'>Raza</p>
+                      <p className='text-sm sm:text-base text-center'>{pet.race}</p>
                     </div>
                   </div>
                 </div>
               </div>
+              
+              {/* Pet Photo */}
               <div
                 style={{
                   backgroundImage: `url(${API_URL + pet.photo})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center'
                 }}
-                className='w-100 h-100 rounded-lg'
+                className='w-64 h-64 sm:w-80 sm:h-80 lg:w-100 lg:h-100 rounded-lg order-1 lg:order-2'
               ></div>
             </div>
 
-            <div className='flex justify-center'>
-              <div className='bg-white rounded-xl w-xl shadow-md p-6 mt-8'>
-                <div className='flex justify-around border-b border-purple-400 pb-2 mb-4 font-semibold'>
-                  <span>Próxima Visita</span>
+            {/* Next Visit Section */}
+            <div className='flex justify-center mb-8'>
+              <div className='bg-white rounded-xl w-full max-w-md sm:max-w-lg lg:w-xl shadow-md p-4 sm:p-6'>
+                <div className='flex justify-center border-b border-purple-400 pb-2 mb-4 font-semibold'>
+                  <span className='text-lg sm:text-xl'>Próxima Visita</span>
                 </div>
-                <div className='flex justify-around items-center mb-6 text-lg'>
+                <div className='flex justify-center items-center mb-6 text-center'>
                   {/* Utiliza optional chaining para acceder a las propiedades de consultation */}
-                  <span className='font-bold text-xl'>
+                  <span className='font-bold text-lg sm:text-xl break-words'>
                     {consultation?.nextVisitDate // Si consultation y nextVisitDate existen
                       ? new Date(consultation.nextVisitDate).toLocaleString('es-ES', {
                           day: 'numeric',
@@ -148,7 +152,7 @@ const Animal = () => {
                 {/* Solo muestra el botón si consultation existe y nextVisitDate es null */}
                 {consultation && consultation.nextVisitDate === null && (
                   <button
-                    className='w-full border border-purple-500 rounded-md py-2 text-purple-600 font-semibold hover:bg-purple-600 hover:text-white transition'
+                    className='w-full border border-purple-500 rounded-md py-2 sm:py-3 text-sm sm:text-base text-purple-600 font-semibold hover:bg-purple-600 hover:text-white transition'
                     onClick={() => setShowNextVisitForm(true)}
                   >
                     Pedir Turno
@@ -157,7 +161,7 @@ const Animal = () => {
                 {/* Si consultation es null (sin consultas previas) también se podría mostrar el botón */}
                 {!consultation && (
                     <button
-                        className='w-full border border-purple-500 rounded-md py-2 text-purple-600 font-semibold hover:bg-purple-600 hover:text-white transition'
+                        className='w-full border border-purple-500 rounded-md py-2 sm:py-3 text-sm sm:text-base text-purple-600 font-semibold hover:bg-purple-600 hover:text-white transition'
                         onClick={() => setShowNextVisitForm(true)}
                     >
                         Pedir Primer Turno
@@ -166,38 +170,41 @@ const Animal = () => {
               </div>
             </div>
 
-            <h2 className='relative text-3xl font-bold text-center inline-block my-15'>
+            {/* Consultation Options */}
+            <h2 className='relative text-xl sm:text-2xl lg:text-3xl font-bold text-center inline-block mx-auto my-8 sm:my-15'>
               ¿Qué quieres consultar?
-              <span className='block absolute left-1/2 -bottom-2 h-0.5 w-40 -translate-x-1/2 bg-aquamarine'></span>
-              <span className='block absolute left-1/2 -bottom-4 h-0.5 w-24 -translate-x-1/2 bg-purple-600'></span>
+              <span className='block absolute left-1/2 -bottom-2 h-0.5 w-32 sm:w-40 -translate-x-1/2 bg-aquamarine'></span>
+              <span className='block absolute left-1/2 -bottom-4 h-0.5 w-20 sm:w-24 -translate-x-1/2 bg-purple-600'></span>
             </h2>
-            <div className='flex justify-around mb-16 wrap-normal'>
+            
+            {/* Action Buttons - Responsive Grid */}
+            <div className='flex flex-col sm:flex-row sm:flex-wrap lg:flex-nowrap justify-center items-center gap-4 sm:gap-6 lg:gap-8 mb-16 px-4'>
               <Link
                 to={`/animal/${id}/diagnostic`}
-                className='border-purple-600 border-2 rounded-xl px-3 py-3 text-xl hover:bg-purple-500 hover:text-white transition duration-300'
+                className='w-full sm:w-auto border-purple-600 border-2 rounded-xl px-4 py-3 text-center text-sm sm:text-base lg:text-xl hover:bg-purple-500 hover:text-white transition duration-300'
               >
                 Diagnóstico por Imagen
               </Link>
               <Link
                 to={`/animal/${id}/analysis`}
-                className='border-purple-600 border-2 rounded-xl px-3 py-3 text-xl hover:bg-purple-500 hover:text-white transition duration-300'
+                className='w-full sm:w-auto border-purple-600 border-2 rounded-xl px-4 py-3 text-center text-sm sm:text-base lg:text-xl hover:bg-purple-500 hover:text-white transition duration-300'
               >
                 Análisis de Sangre
               </Link>
               <Link
                 to={`/animal/${id}/vaccination`}
-                className='border-purple-600 border-2 rounded-xl px-3 py-3 text-xl hover:bg-purple-500 hover:text-white transition duration-300'
+                className='w-full sm:w-auto border-purple-600 border-2 rounded-xl px-4 py-3 text-center text-sm sm:text-base lg:text-xl hover:bg-purple-500 hover:text-white transition duration-300'
               >
                 Vacunaciones
               </Link>
             </div>
           </div>
 
-          {/* Modal para pedir turno */}
+          {/* Modal para pedir turno - Responsive */}
           {showNextVisitForm && (
-            <div className='fixed inset-0 bg-black/30 flex justify-center items-center z-50'>
-              <div className='bg-white p-6 rounded-lg shadow-lg text-center w-96'>
-                <h2 className='text-xl font-bold mb-4'>Selecciona día y hora</h2>
+            <div className='fixed inset-0 bg-black/30 flex justify-center items-center z-50 px-4'>
+              <div className='bg-white p-4 sm:p-6 rounded-lg shadow-lg text-center w-full max-w-sm sm:max-w-md lg:max-w-lg'>
+                <h2 className='text-lg sm:text-xl font-bold mb-4'>Selecciona día y hora</h2>
 
                 <DatePicker
                   selected={selectedVisitDate}
@@ -239,13 +246,13 @@ const Animal = () => {
                       )
                       .map((d) => new Date(d))
                   }
-                  className='border px-4 py-2 rounded w-full'
+                  className='border px-3 sm:px-4 py-2 rounded w-full text-sm sm:text-base'
                 />
 
-                <div className='flex justify-center gap-4 mt-4'>
+                <div className='flex flex-col sm:flex-row justify-center gap-4 mt-4'>
                   <button
                     onClick={handleSetNextVisitDate} // Usamos la función separada
-                    className='bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700'
+                    className='w-full sm:w-auto bg-green-600 text-white px-4 py-2 sm:py-3 rounded hover:bg-green-700 text-sm sm:text-base'
                   >
                     Confirmar
                   </button>
@@ -254,7 +261,7 @@ const Animal = () => {
                         setShowNextVisitForm(false);
                         setSelectedVisitDate(null); // Limpiar al cancelar
                     }}
-                    className='bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500'
+                    className='w-full sm:w-auto bg-gray-400 text-white px-4 py-2 sm:py-3 rounded hover:bg-gray-500 text-sm sm:text-base'
                   >
                     Cancelar
                   </button>

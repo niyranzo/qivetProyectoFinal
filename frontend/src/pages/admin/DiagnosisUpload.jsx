@@ -61,7 +61,7 @@ const DiagnosisUpload = () => {
 
   return (
     <div className='mt-50 bg-white rounded-lg shadow-md p-6 space-y-4 max-w-xl mx-auto'>
-      <p className="font-semibold border-b-2 border-purple-400 pb-3 mb-4 text-3xl text-gray-800 flex">
+      <p className="font-semibold border-b-2 border-purple-400 pb-3 mb-4 text-3xl text-gray-800 flex flex-wrap">
         Añadir Diagnóstico - <p className='text-gray-500 ml-2'> { pet.name}</p></p>
 
       <div className="flex flex-col sm:flex-row items-center justify-between space-y-3 sm:space-y-0 sm:space-x-4 mb-10">

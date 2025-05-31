@@ -7,25 +7,21 @@ import { useAdmin } from '../hooks/Admin/useAdmin';
 
 const Vaccination = () => {
     const { id } = useParams();
-    const { getVaccination } = useAnimals();
+    const { getVaccination, loading } = useAnimals();
     const { user } = useAuth();
     const { deleteVaccination, loading: adminLoading } = useAdmin();
     const [vaccinations, setVaccination] = useState([]);
-    const [componentLoading, setComponentLoading] = useState(true);
     const [showConfirm, setShowConfirm] = useState(false);
     const [selectedVaccinationId, setSelectedVaccinationId] = useState(null);
 
     const fetchVaccinations = async () => {
         try {
-            setComponentLoading(true);
             const data = await getVaccination(id);
             setVaccination(Array.isArray(data) ? data : []);
         } catch (err) {
             console.error("Error fetching vaccinations:", err);
             toast.error("Error al cargar las vacunas.");
-        } finally {
-            setComponentLoading(false);
-        }
+        } 
     };
 
     useEffect(() => {
@@ -55,7 +51,7 @@ const Vaccination = () => {
         setSelectedVaccinationId(null);
     };
 
-    if (componentLoading || adminLoading) {
+    if (loading) {
         return (
             <div className="mt-40 flex justify-center items-center h-full">
                 <Spinner />

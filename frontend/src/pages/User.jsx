@@ -19,6 +19,10 @@ const User = () => {
   // Estados para mensajes de error y éxito del formulario
   const [passwordError, setPasswordError] = useState('');
   const [passwordSuccess, setPasswordSuccess] = useState('');
+  // Estados para controlar la visibilidad de las contraseñas
+  const [showOldPassword, setShowOldPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   // Efecto para verificar si el usuario necesita cambiar la contraseña al cargar el componente
   useEffect(() => {
@@ -73,6 +77,10 @@ const User = () => {
       setOldPassword('');
       setNewPassword('');
       setConfirmNewPassword('');
+      // Resetear la visibilidad de las contraseñas
+      setShowOldPassword(false);
+      setShowNewPassword(false);
+      setShowConfirmPassword(false);
       setShowChangePasswordModal(false); // ¡Cerrar el modal al éxito!
     } catch (error) {
       // Capturar y mostrar errores de la API
@@ -91,24 +99,35 @@ const User = () => {
   }
 
   return (
-    <div className='mt-50'>
-      <div className='flex justify-center'>
-        <div className='flex flex-col items-center justify-center mr-40' >
-          <div className='flex font-bold text-5xl mb-5'>
-            <p className='mr-3'>{user.name}</p>
+    <div className='mt-50 px-4 md:px-0'>
+      {/* Header Section - Responsive Layout */}
+      <div className='flex flex-col lg:flex-row justify-center items-center gap-8 lg:gap-0'>
+        {/* User Name Section */}
+        <div className='flex flex-col items-center justify-center lg:mr-40 order-1 lg:order-1'>
+          <div className='flex flex-col sm:flex-row font-bold text-3xl sm:text-4xl lg:text-5xl mb-5 text-center'>
+            <p className='mr-0 sm:mr-3 mb-2 sm:mb-0'>{user.name}</p>
             <p className=''>{user.lastname}</p>
           </div>
-          <hr className='bg-gradient-to-r from-pinkLigth to-aquamarine h-2 border-0 rounded-2xl w-100'/>
+          <hr className='bg-gradient-to-r from-pinkLigth to-aquamarine h-2 border-0 rounded-2xl w-60 sm:w-80 lg:w-100'/>
         </div>
-        <div className='flex flex-col items-center justify-center rounded-xl shadow-lg shadow-gray-500 px-20 py-2'>
-          <p className='border-b-2 border-b-aquamarine px-4 text-3xl font-bold mb-3'>Tus Datos</p>
-          {/* Añadida la clase `break-all` para el email y `className` corregido de `class` */}
-          <p className='text-lg break-all'><i className="fa-solid fa-envelope mr-2"></i>{user.email}</p>
-          <p className='text-lg'><i className="fa-solid fa-phone mr-2" ></i>{user.phone}</p>
+        
+        {/* User Data Card */}
+        <div className='flex flex-col items-center justify-center rounded-xl shadow-lg shadow-gray-500 px-6 sm:px-12 lg:px-20 py-4 lg:py-2 w-full max-w-sm lg:max-w-none lg:w-auto order-2 lg:order-2'>
+          <p className='border-b-2 border-b-aquamarine px-4 text-xl sm:text-2xl lg:text-3xl font-bold mb-3 text-center'>Tus Datos</p>
+          <div className='text-center lg:text-left'>
+            <p className='text-sm sm:text-base lg:text-lg break-all mb-2'>
+              <i className="fa-solid fa-envelope mr-2"></i>{user.email}
+            </p>
+            <p className='text-sm sm:text-base lg:text-lg'>
+              <i className="fa-solid fa-phone mr-2"></i>{user.phone}
+            </p>
+          </div>
         </div>
       </div>
+
+      {/* Pets Section */}
       <div className='flex flex-col items-center mt-10'>
-        <p className='w-45 text-2xl font-bold text-center mt-10 border-b-2 border-b-aquamarine'>Tus Mascotas</p>
+        <p className='w-full max-w-md text-xl sm:text-2xl font-bold text-center mt-10 border-b-2 border-b-aquamarine pb-2'>Tus Mascotas</p>
         <div className="mt-10 flex justify-evenly w-full mb-10 flex-wrap gap-10">
           {/* Mostrar spinner mientras se cargan las mascotas */}
           {animalsLoading ? (
@@ -138,60 +157,81 @@ const User = () => {
         </div>
       </div>
 
-      {/* Modal de Cambio de Contraseña */}
+      {/* Modal de Cambio de Contraseña - Responsive */}
       {showChangePasswordModal && (
-        <div className="fixed inset-0 bg-black/30 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg text-center w-96">
-            <h2 className="text-2xl font-bold mb-4 text-purple-700">
+        <div className="fixed inset-0 bg-black/30 flex justify-center items-center z-50 px-4">
+          <div className="bg-white p-4 sm:p-6 rounded-lg shadow-lg text-center w-full max-w-sm sm:max-w-md lg:max-w-lg">
+            <h2 className="text-xl sm:text-2xl font-bold mb-4 text-purple-700">
               ¡Importante! Cambia tu Contraseña
             </h2>
-            <p className="mb-6 text-gray-700">
+            <p className="mb-6 text-sm sm:text-base text-gray-700">
               Parece que es tu primer inicio de sesión o necesitas actualizar tu contraseña.
               Por favor, establece una nueva contraseña segura.
             </p>
 
             <form onSubmit={handlePasswordChange} className="flex flex-col gap-4">
-              <div>
+              <div className="relative">
                 <input
-                  type="password"
+                  type={showOldPassword ? "text" : "password"}
                   placeholder="Contraseña Antigua"
-                  className="w-full p-2 border border-gray-300 rounded"
+                  className="w-full p-2 sm:p-3 pr-10 border border-gray-300 rounded text-sm sm:text-base"
                   value={oldPassword}
                   onChange={(e) => setOldPassword(e.target.value)}
                   required
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowOldPassword(!showOldPassword)}
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                >
+                  <i className={showOldPassword ? "fa-solid fa-eye-slash" : "fa-solid fa-eye"}></i>
+                </button>
               </div>
-              <div>
+              <div className="relative">
                 <input
-                  type="password"
+                  type={showNewPassword ? "text" : "password"}
                   placeholder="Nueva Contraseña"
-                  className="w-full p-2 border border-gray-300 rounded"
+                  className="w-full p-2 sm:p-3 pr-10 border border-gray-300 rounded text-sm sm:text-base"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                   required
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowNewPassword(!showNewPassword)}
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                >
+                  <i className={showNewPassword ? "fa-solid fa-eye-slash" : "fa-solid fa-eye"}></i>
+                </button>
               </div>
-              <div>
+              <div className="relative">
                 <input
-                  type="password"
+                  type={showConfirmPassword ? "text" : "password"}
                   placeholder="Confirmar Nueva Contraseña"
-                  className="w-full p-2 border border-gray-300 rounded"
+                  className="w-full p-2 sm:p-3 pr-10 border border-gray-300 rounded text-sm sm:text-base"
                   value={confirmNewPassword}
                   onChange={(e) => setConfirmNewPassword(e.target.value)}
                   required
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                >
+                  <i className={showConfirmPassword ? "fa-solid fa-eye-slash" : "fa-solid fa-eye"}></i>
+                </button>
               </div>
 
               {passwordError && (
-                <p className="text-red-600 text-sm">{passwordError}</p>
+                <p className="text-red-600 text-xs sm:text-sm">{passwordError}</p>
               )}
               {passwordSuccess && (
-                <p className="text-green-600 text-sm">{passwordSuccess}</p>
+                <p className="text-green-600 text-xs sm:text-sm">{passwordSuccess}</p>
               )}
 
               <button
                 type="submit"
-                className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition duration-300"
+                className="bg-purple-600 text-white px-4 py-2 sm:py-3 rounded hover:bg-purple-700 transition duration-300 text-sm sm:text-base"
               >
                 Cambiar Contraseña
               </button>

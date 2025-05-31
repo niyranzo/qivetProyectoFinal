@@ -45,7 +45,7 @@ const History = () => {
             </h1>
             <hr className='bg-gradient-to-r from-pinkLigth to-aquamarine h-2 border-0 rounded-2xl w-100 mt-5'/>
 
-            <div className='flex justify-around mb-16 wrap-normal w-250 mt-10'>
+            <div className='flex justify-around mb-16 wrap-normal gap-4 lg:w-250 mt-10 flex-wrap'>
                 <Link
                     to={`/animal/${id}/diagnostic`}
                     className='border-purple-600 border-2 rounded-xl px-3 py-3 text-xl hover:bg-purple-500 hover:text-white transition duration-300'
