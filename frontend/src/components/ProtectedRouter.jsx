@@ -1,16 +1,15 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../hooks/Auth/useAuth';import Spinner from './Spinner';
 
 const ProtectedRoute = ({children, admin}) => {
-  const {user, token, loading} = useAuth();
-  console.log(user, token)
+  const { user, loading } = useAuth();
 
   if (loading) {
-    return <div className='mt-400'>Cargando...</div>; // o un spinner elegante
+    return <Spinner/>; 
   }
 
-   if (!user) {
+  if (!user) {
     return <Navigate to="/" replace />;
   }
 

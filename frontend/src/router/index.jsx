@@ -6,13 +6,22 @@ import Home from "../pages/Home";
 import { ROUTES } from "./path";
 import Contact from "../pages/Contact";
 import Login from "../pages/Login";
-import Admin from "../pages/Admin";
+import Admin from "../pages/admin/Admin";
 import User from "../pages/User";
 import ProtectedRoute from "../components/ProtectedRouter";
-import Animal from "../pages/Animal";
-import Diagnostic from "../pages/Diagnostic";
-import Analysis from "../pages/Analysis";
+import Animal from "../pages/animal/Animal";
+import Diagnostic from "../pages/animal/Diagnostic";
+import Analysis from "../pages/animal/Analysis";
 import Vaccination from "../pages/Vaccination";
+import Register from "../pages/admin/Register";
+import Edit from "../pages/admin/Edit";
+import NewAnimal from "../pages/admin/NewAnimal";
+import UserAnim from "../pages/admin/UserAnim";
+import Consultation from "../pages/admin/Consultation";
+import DiagnosisUpload from "../pages/admin/DiagnosisUpload";
+import AnalysisUpload from "../pages/admin/AnalysisUpload";
+import History from "../pages/admin/History";
+import Appointments from "../pages/admin/Appoinments";
 // const url = import.meta.env.VITE_API_URL;
 // const pokemonUrl = import.meta.env.VITE_POKEMON;
 
@@ -25,11 +34,18 @@ export const router = createBrowserRouter([
         children: [ 
             {
                 path: ROUTES.HOME, // === "/"
-                element: <Home />
+                element: 
+                // <ProtectedRoute admin={false}>
+                    <Home />
+                // </ProtectedRoute>
             },
             {
                 path: ROUTES.CONTACT, 
-                element: <Contact />
+                element:
+                // <ProtectedRoute admin={false}>
+                    <Contact />
+                // </ProtectedRoute>
+                
             },
             {
                 path: ROUTES.LOGIN, 
@@ -44,7 +60,14 @@ export const router = createBrowserRouter([
                 element: 
                 <ProtectedRoute admin={true}>       
                     <Admin />
-                </ProtectedRoute>
+                </ProtectedRoute>,
+            },
+            {
+                path: ROUTES.REGISTER,
+                element: 
+                // <ProtectedRoute admin={true}>       
+                    <Register />
+                // </ProtectedRoute>,
             },
             {
                 path: ROUTES.USER,
@@ -80,25 +103,64 @@ export const router = createBrowserRouter([
                 <ProtectedRoute admin={false}>       
                     <Vaccination />
                 </ProtectedRoute>,
+            },
+            {
+                path: ROUTES.EDIT, 
+                element: 
+                <ProtectedRoute admin={false}>       
+                    <Edit />
+                </ProtectedRoute>
+            },
+            {
+                path: ROUTES.NEWANIMAL, 
+                element: 
+                <ProtectedRoute admin={true}>       
+                    <NewAnimal />
+                </ProtectedRoute>,
+            },
+            {
+                path: ROUTES.USERANIM, 
+                element: 
+                <ProtectedRoute admin={true}>       
+                    <UserAnim />
+                </ProtectedRoute>,
+            },
+            {
+                path: ROUTES.CONSULTATION, 
+                element: 
+                <ProtectedRoute admin={true}>       
+                    <Consultation />
+                </ProtectedRoute>,
+            },
+            {
+                path: ROUTES.DIAGNOSTICNEW, 
+                element: 
+                <ProtectedRoute admin={true}>       
+                    <DiagnosisUpload />
+                </ProtectedRoute>,
+            },
+            {
+                path: ROUTES.ANALYSISNEW,
+                element:
+                <ProtectedRoute admin={true}>       
+                    <AnalysisUpload /> 
+                </ProtectedRoute>,
+            },
+            {
+                path: ROUTES.HISTORY,
+                element:
+                <ProtectedRoute admin={true}>       
+                    <History /> 
+                </ProtectedRoute>,
+            },
+            {
+                path: ROUTES.APPOINTMENT,
+                element:
+                <ProtectedRoute admin={true}>       
+                    <Appointments /> 
+                </ProtectedRoute>,
             }
-        //     {
-        //         path: ROUTES.POKEMON_DETAILS, // === "/search"
-        //         element: <PokemonDetailPage />,
-        //         errorElement:<ErrorPage />,
-        //         //loader: permite hacer un fect directamente en la ruta
-        //         loader: async ({ params }) => {
-        //             // hago el fetch del value para la busqueda del pokemon
-        //             const response = await fetch(`${url}${pokemonUrl}/${params.name}`);
-        //             if(!response.ok){
-        //                 throw new Error("Pokemon not found");
-        //             }
-        //             return await response.json();
-        //         } 
-        //     },
-        //     {
-        //         path: ROUTES.ABOUT, // === "/search"
-        //         element: <AboutPage />
-        //     },
+            
         ]
     },
 ]);

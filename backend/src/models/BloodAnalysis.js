@@ -17,6 +17,7 @@ const BloodAnalysis = sequelize.define('BloodAnalysis', {
   },
   date: {
     type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW,
     allowNull: false
   },
   report_pdf: {

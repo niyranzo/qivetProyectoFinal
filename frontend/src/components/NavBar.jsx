@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../hooks/Auth/useAuth';
 
 
 const NavBar = () => {
@@ -13,13 +13,18 @@ const NavBar = () => {
     navigate("/"); // ← redirección correcta después del logout
   }
   return (
-    <div className='fixed top-0 left-0 w-full z-50 bg-white'>
-        <div className='bg-gradient-to-r from-pinkLigth to-aquamarine h-10 rounded-bl-2xl rounded-br-2xl flex justify-between items-center shadow-md shadow-gray-300'>
-          <p className='ml-3'>QIVET | La Calera </p>
-          <p className='mr-3'>Simon Bolivar 1254, Calera, Córdoba</p>  
-        </div>
-        <div className='flex justify-around my-3 items-center '>
-          <img src="/img/logos/logo.png" alt="logo qivet" className='w-70'/>
+    <div className='fixed top-0 left-0 w-full z-50 bg-white '>
+        <div className='bg-gradient-to-r from-pinkLigth to-aquamarine h-10 rounded-bl-2xl rounded-br-2xl justify-between items-center shadow-md shadow-gray-300 flex'>
+          <p className='ml-3 text-center w-full md:w-auto md:text-left'>QIVET | La Calera </p>
+          <p className='mr-3 hidden md:block'>Simon Bolivar 1254, Calera, Córdoba</p>
+      </div>
+        <div className='flex justify-around my-3 items-center'>
+          {/* Imagen para pantallas grandes (md y superiores) */}
+          <img src="/img/logos/logo.png" alt="logo qivet" className='w-70 hidden md:block' />
+
+          {/* Imagen para pantallas pequeñas (por debajo de md) */}
+          <img src="/img/logos/logoSmall.png" alt="logo qivet" className='w-20 md:hidden' />
+          
           { !user ? (
             <>
               <Link to="/" className="group relative h-7 text-center text-lg">

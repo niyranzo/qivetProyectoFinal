@@ -1,6 +1,8 @@
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import bcrypt from "bcryptjs";
+import enviarCorreo from "../helpers/email.js";
+import generatePassword from "../helpers/password.js";
 
 // Iniciar sesión
 const login = async (req, res) => {
@@ -17,12 +19,13 @@ const login = async (req, res) => {
         res.cookie("token", token, {
             httpOnly: true,
             secure: false,
-            maxAge: 3600000,
+            maxAge: 10800000, 
             sameSite: "strict"
         });
         // Eliminar la contraseña del objeto de usuario antes de enviarlo
         res.json({ message: "Inicio de sesión exitoso", user: user});
     } catch (error) {
+        console.error(error);
         res.status(400).json({ message: "Error en el inicio de sesión" });
     }
 };
@@ -30,8 +33,11 @@ const login = async (req, res) => {
 // Registrar usuario
 const register = async (req, res) => {
     try {
-        const { email, password, name, lastname, phone, type } = req.body;
+        const { email, name, lastname, phone, type } = req.body;
         const existingUser = await User.findOne({ where: { email } });
+
+        const password = generatePassword(name, email, lastname)
+        // en tu endpoint POST /register
         
         if (existingUser) {
             return res.status(400).json({ message: "El usuario ya existe" });
@@ -40,8 +46,10 @@ const register = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = await User.create({ email, password: hashedPassword, name, lastname, phone, type });
         
-        res.status(201).json({ message: "Usuario registrado" });
+        await enviarCorreo(email, password, name);
+        res.status(201).json({ message: "Usuario registrado" , user});
     } catch (error) {
+        console.error(error);
         res.status(400).json({ message: "Error en el registro" });
     }
 };

@@ -4,8 +4,11 @@ import loadingGif from '../assets/pets-loader.gif'; // Ajusta la ruta según tu 
 
 const Spinner = () => {
   return (
-    <div>
-        <img src={loadingGif} alt="loading..." className='w-30' />
+    <div className='mt-60 w-full h-full'>
+      <div className='flex flex-col justify-center items-center h-full'>
+        <img src={loadingGif} alt="loading..." className='w-30 ' />
+        <p>Cargando...</p>
+      </div>
     </div>
   )
 }

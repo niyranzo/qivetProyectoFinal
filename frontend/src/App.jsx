@@ -2,9 +2,10 @@ import { RouterProvider } from 'react-router-dom'
 import './App.css'
 import RootLayout from './layouts/RootLayout'
 import { router } from './router'
-import { AuthProvider } from './contexts/AuthContext'
 import { ToastContainer } from 'react-toastify'
-import { AnimalsProvider } from './contexts/AnimalContext'
+import { AuthProvider } from './contexts/Auth/AuthProvider'
+import { AnimalsProvider } from './contexts/Animal/AnimalProvider'
+import { AdminProvider } from './contexts/Admin/AdminProvider'
 
 function App() {
   
@@ -12,7 +13,9 @@ function App() {
     <>
     <AuthProvider>
       <AnimalsProvider>
-        <RouterProvider router={router}/>
+        <AdminProvider>
+          <RouterProvider router={router}/>
+        </AdminProvider>
       </AnimalsProvider>
     </AuthProvider>
     <ToastContainer  position="top-center" />

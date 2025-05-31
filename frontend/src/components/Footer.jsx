@@ -3,14 +3,17 @@ import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
-    <div className=' bg-pinkLigth py-2 px-5 rounded-tl-2xl rounded-tr-2xl shadow-xl shadow-gray-500 '>
+    <div className=' bg-pinkLigth py-2 px-5 rounded-tl-2xl rounded-tr-2xl '>
       <div className='flex justify-between items-center mb-5'>
-        <div className='flex text-lg'>
-          <Link to="/" className='mx-5 hover:font-bold transition-all duration-300'>INICIO</Link>
-          <Link to="/contact" className='mx-5 hover:font-bold transition-all duration-300'>CONTACTO</Link>
+        {/* Div de los enlaces: Se centra en móviles, se comporta como flex-start en md y arriba */}
+        <div className='flex text-lg w-full justify-center md:w-auto md:justify-start'>
+            <Link to="/" className='mx-5 hover:font-bold transition-all duration-300'>INICIO</Link>
+            <Link to="/contact" className='mx-5 hover:font-bold transition-all duration-300'>CONTACTO</Link>
         </div>
-        <img src="img/logos/logoBlack.png" alt="logoBlack.png" className='w-70'/>
-      </div> 
+
+        {/* Imagen: Oculta en móviles, visible en md y arriba */}
+        <img src="img/logoBlack.png" alt="logoBlack.png" className='w-70 hidden md:block'/>
+    </div>
       <hr />
       <div className='flex justify-between mt-5 text-base'>
         <p>© Copyright Qivet</p>

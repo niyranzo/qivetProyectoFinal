@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useAuth } from '../contexts/AuthContext'
+import { useAuth } from '../hooks/Auth/useAuth';
 
 const Home = () => {
   const { user } = useAuth();
@@ -54,7 +54,7 @@ const Home = () => {
           </h2>
           <div className='flex w-full flex-col lg:flex-row justify-around my-10'>
             <div className='flex flex-col items-center'>
-              <img src="img/user-icon.png" alt="user.png" className='w-70 h-70 border-1 border-blue-400 rounded-full' />
+              <img src="img/marti.jpg" alt="marti.jpg" className='w-70 h-70 rounded-full' />
               <p className='text-2xl font-semibold my-3 relative' >
                 Martina
                 <span className="block absolute left-1/2 -bottom-2 h-0.5 w-40 -translate-x-1/2 bg-purple-600"></span>
@@ -62,7 +62,7 @@ const Home = () => {
               <p className='text-xl w-100 text-center mt-3'>Clínica especialista en Nutrición y Anestesiología.</p>
             </div>
             <div className='flex flex-col items-center mt-10 lg:mt-0'>
-            <img src="img/user-icon.png" alt="user.png" className='w-70 h-70 border-1 border-blue-400 rounded-full' />
+            <img src="img/malvina.jpg" alt="malvina.jpg" className='w-70 h-70 rounded-full bg-cover' />
             <p className='text-2xl font-semibold my-3 relative'>
                   Malvina
                   <span className="block absolute left-1/2 -bottom-2 h-0.5 w-40 -translate-x-1/2 bg-purple-600"></span>

@@ -17,6 +17,7 @@ const ImageDiagnostic = sequelize.define('ImageDiagnostic', {
   },
   date: {
     type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW,
     allowNull: false
   },
   report_pdf: {

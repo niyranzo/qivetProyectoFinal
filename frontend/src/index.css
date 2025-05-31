@@ -20,3 +20,19 @@ html{
   font-family: 'Montserrat', sans-serif;
   /* overflow-x: hidden; */
 }
+
+
+.has-appointment {
+  background-color: #e0f7fa !important; 
+  color: black !important;
+  font-weight: bold;
+}
+
+.react-calendar__tile.has-appointment:hover {
+  background-color: #b3e5fc !important; 
+}
+
+.react-calendar__tile--active.has-appointment {
+  background-color: aquamarine !important; 
+  color: black !important;
+}

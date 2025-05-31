@@ -1,5 +1,5 @@
 import express from 'express';
-import { getUserProfile, getUsers } from '../controllers/userController.js';
+import { deleteUser, getUserById, getUserProfile, getUsers, updateUser } from '../controllers/userController.js';
 import authMiddleware from '../middleware/authMiddleware.js';
 
 const router = express.Router();
@@ -9,6 +9,10 @@ const router = express.Router();
 
 router.get('/me', authMiddleware, getUserProfile);
 router.get('/', getUsers);
+router.get('/:id', getUserById);
+router.delete('/:id', deleteUser);
+router.patch('/:id', updateUser );
+
 
 // aqui tengo q añadir las rutas que falta (logear con google)
 

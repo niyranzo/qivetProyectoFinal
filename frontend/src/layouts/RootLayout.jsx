@@ -7,13 +7,13 @@ import { Outlet } from 'react-router-dom';
 
 const RootLayout = () => {
   return (
-    <>
+    <div className="root-layout-container">
       <NavBar />
-      <main className="w-[70%] mx-auto">
-      <Outlet />
-      </main>
+        <main className="md:w-[70%] mx-auto mt-40" class="main-content">
+          <Outlet />
+        </main>
       <Footer/>
-    </>
+    </div>
   )
 }
 

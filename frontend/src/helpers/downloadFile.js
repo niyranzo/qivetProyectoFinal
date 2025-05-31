@@ -4,9 +4,7 @@
  * @param {string} filename - Nombre que tendrá el archivo descargado
  * @returns {void}
  */
-export const downloadFile = (url, filename) => {
-  console.log(`Descargando: ${url} como ${filename}`);
-  
+export const downloadFile = (url, filename) => {  
   // Crear un iframe oculto para manejar la descarga sin navegación
   const iframe = document.createElement('iframe');
   iframe.style.display = 'none';
@@ -39,13 +37,11 @@ export const downloadFile = (url, filename) => {
       }, 100);
     } else {
       console.error('Error al descargar:', this.status, this.statusText);
-      alert(`Error al descargar el archivo. Estado: ${this.status}`);
     }
   };
   
   xhr.onerror = function() {
     console.error('Error de red al intentar descargar el archivo');
-    alert('Error de conexión al intentar descargar el archivo.');
   };
   
   xhr.send();

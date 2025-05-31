@@ -5,21 +5,25 @@ services:
     container_name: qivet_backend
     ports:
       - "3000:3000"
-    depends_on:
-      postgres:
-        condition: service_healthy
     volumes:
-      - ./public/images:/app/public/images
-      - ./public/pdfs:/app/public/pdfs
+      - ./src/public:/usr/src/public
     environment:
       - DB_HOST=postgres
       - DB_PORT=5432
       - DB_NAME=qivet_db
       - DB_USER=admin
       - DB_PASSWORD=admin
+      - JWT_SECRET=tu_secreto_jwt_seguro
+      - ADMIN_EMAIL=admin@qivet.com
+      - ADMIN_PASSWORD=admin
+      - ADMIN_NAME=Qivet
+      - ADMIN_LASTNAME=Admin
+      - ADMIN_PHONE="1234567890"
     networks:
       - backend_network
-    restart: on-failure
+    depends_on:
+      postgres:
+        condition: service_healthy
 
   postgres:
     image: postgres:latest
@@ -32,12 +36,11 @@ services:
       - backend_network
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U admin -d qivet_db"]
       interval: 5s
+      timeout: 5s
       retries: 5
-      timeout: 3s
 
   pgweb:
     image: sosedoff/pgweb
@@ -51,7 +54,6 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    restart: unless-stopped
 
 volumes:
   postgres_data:

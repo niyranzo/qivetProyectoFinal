@@ -33,7 +33,8 @@ const Animal = sequelize.define('Animal', {
   }
 }, {
   tableName: 'Animals',
-  timestamps: false
+  timestamps: false,
+  modelName: 'Animal'
 });
 
 export default Animal; 

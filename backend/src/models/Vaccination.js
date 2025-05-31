@@ -21,10 +21,15 @@ const Vaccination = sequelize.define('Vaccination', {
   },
   date: {
     type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW, 
     allowNull: false
   },
   next_dose: {
     type: DataTypes.DATE
+  },
+  applicated: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false
   }
 }, {
   tableName: 'Vaccinations',

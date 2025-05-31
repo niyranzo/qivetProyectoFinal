@@ -34,6 +34,11 @@ const User = sequelize.define('User', {
   password: {
     type: DataTypes.STRING,
     allowNull: false
+  },
+  changePassword: { // Campo para indicar si el usuario debe cambiar su contraseña
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: true // Por defecto, debe cambiarla
   }
 }, {
   tableName: 'Users',

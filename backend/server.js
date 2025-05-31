@@ -1,6 +1,7 @@
 import app from './src/app.js';
 import { sequelize, models } from './src/models/index.js';
 import { testConnection } from './src/config/db.js';
+import { createAdminUser } from './src/helpers/admin.js';
 
 const startServer = async () => {
   try {
@@ -27,6 +28,8 @@ const startServer = async () => {
       console.log("⚠️ No se pudo conectar a la base de datos.");
       return;
     }
+
+    await createAdminUser();
 
     const PORT = process.env.PORT || 3000;
     app.listen(PORT, () => {
