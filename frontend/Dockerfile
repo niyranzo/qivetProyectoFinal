@@ -1,20 +1,16 @@
 # Dockerfile para Frontend React + Vite
-FROM node:18-alpine
+# Etapa de construcción
+FROM node:18-alpine as build
 
-# Establecer directorio de trabajo
 WORKDIR /app
-
-# Copiar package.json y package-lock.json (si existe)
 COPY package*.json ./
-
-# Instalar dependencias
 RUN npm install
-
-# Copiar el resto del código
 COPY . .
+RUN npm run build
 
-# Exponer el puerto de Vite (por defecto 5173)
-EXPOSE 5173
-
-# Comando para ejecutar en modo desarrollo con hot reload
-CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--port", "5173"]
+# Etapa de producción
+FROM nginx:alpine
+COPY --from=build /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

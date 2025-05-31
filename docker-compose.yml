@@ -7,7 +7,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./src/public:/usr/src/public
+      - ./backend/public:/usr/src/public
     environment:
       - DB_HOST=postgres
       - DB_PORT=5432
@@ -25,6 +25,7 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+    restart: always
 
   frontend:
     build:
@@ -32,19 +33,14 @@ services:
       dockerfile: Dockerfile
     container_name: qivet_frontend
     ports:
-      - "5173:5173"
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
+      - "80:80"
     environment:
       - VITE_API_URL=http://localhost:3000/api/
-      - CHOKIDAR_USEPOLLING=true
     networks:
       - backend_network
     depends_on:
       - backend
-    stdin_open: true
-    tty: true
+    restart: always
 
   postgres:
     image: postgres:latest
@@ -62,19 +58,7 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-
-  pgweb:
-    image: sosedoff/pgweb
-    container_name: qivet_pgweb
-    ports:
-      - "8080:8081"
-    environment:
-      - PGWEB_DB=postgres://admin:admin@postgres:5432/qivet_db?sslmode=disable
-    networks:
-      - backend_network
-    depends_on:
-      postgres:
-        condition: service_healthy
+    restart: always
 
 volumes:
   postgres_data:
