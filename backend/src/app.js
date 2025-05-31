@@ -25,8 +25,10 @@ const rootPath = path.resolve(__dirname, '../');
 // Middlewares
 app.use(cookieParser());
 app.use(cors({
-  origin: 'http://localhost:5173',
-  credentials: true
+    origin: process.env.FRONTEND_URL || 'http://localhost',
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

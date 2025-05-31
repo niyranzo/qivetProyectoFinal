@@ -18,9 +18,9 @@ const login = async (req, res) => {
         
         res.cookie("token", token, {
             httpOnly: true,
-            secure: false,
+            secure: true,
             maxAge: 10800000, 
-            sameSite: "strict"
+            sameSite: "none"
         });
         // Eliminar la contraseña del objeto de usuario antes de enviarlo
         res.json({ message: "Inicio de sesión exitoso", user: user});
