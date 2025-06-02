@@ -1,4 +1,5 @@
-FROM node:18
+# Etapa 1: construir la app con Vite
+FROM node:18-alpine AS build
 
 WORKDIR /app
 
@@ -6,7 +7,15 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
+RUN npm run build
 
-EXPOSE 5173
+# Etapa 2: servir con NGINX
+FROM nginx:alpine
 
-CMD ["npm", "run", "dev"]
+# Copiar el resultado del build al directorio que NGINX sirve
+COPY --from=build /app/dist /usr/share/nginx/html
+
+# Expone el puerto 80 (el que Railway espera)
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
