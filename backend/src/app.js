@@ -61,6 +61,13 @@ app.use('/api/analysis', analysisRouter);
 app.use('/api/consultation', consultationRouter);
 app.use('/api/upload', uploadRouter); 
 
+// Servir frontend (React) para cualquier ruta que no sea API
+app.use(express.static(path.join(rootPath, 'client', 'dist'))); // o 'build' si usás create-react-app
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(rootPath, 'client', 'dist', 'index.html')); // Ajustar según tu estructura
+});
+
 // Ruta base
 app.get('/', (req, res) => {
   res.send('API de Veterinaria funcionando');
