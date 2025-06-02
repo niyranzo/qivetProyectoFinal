@@ -72,10 +72,8 @@ const Admin = () => {
 
   return (
     <div className='min-h-screen bg-gray-50 mt-20 md:mt-0'>
-      {/* Header Section - Responsive */}
       <div className='pt-20 sm:pt-24 md:pt-32 lg:pt-40 px-4 sm:px-6 lg:px-8'>
         <div className='max-w-7xl mx-auto'>
-          {/* Title */}
           <div className='text-center mb-6 sm:mb-8'>
             <h1 className='text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 sm:mb-4'>
               Página Administrador
@@ -83,12 +81,10 @@ const Admin = () => {
             <hr className='bg-gradient-to-r from-pinkLigth to-aquamarine h-1 sm:h-2 border-0 rounded-2xl mx-auto max-w-xs sm:max-w-md'/>
           </div>
           
-          {/* Admin Name */}
           <p className='text-lg sm:text-xl lg:text-2xl font-semibold text-center mb-6 sm:mb-8 lg:mb-10'>
             {`${user.name} ${user.lastname}`}
           </p>
 
-          {/* Appointments Link */}
           <div className='flex justify-center mb-6 sm:mb-8'>
             <Link 
               to="/admin/appointments" 
@@ -98,9 +94,7 @@ const Admin = () => {
             </Link>
           </div>
 
-          {/* Search and Register Section - Responsive */}
           <div className='flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-10'>
-            {/* Search Input */}
             <div className='w-full sm:w-auto flex-1 sm:flex-none sm:min-w-80'>
               <div className='border-2 border-purple-500 rounded-lg px-3 py-2 sm:px-4 sm:py-3 flex items-center bg-white'>
                 <i className="fa-solid fa-magnifying-glass text-purple-500 mr-2"></i>
@@ -114,7 +108,6 @@ const Admin = () => {
               </div>
             </div>
 
-            {/* Register Link */}
             <Link 
               to="/admin/register" 
               className='w-full sm:w-auto border-2 border-purple-500 rounded-xl px-4 py-2 sm:px-6 sm:py-3 hover:bg-purple-500 hover:text-white transition duration-300 text-center text-sm sm:text-base font-medium'
@@ -125,7 +118,6 @@ const Admin = () => {
         </div>
       </div>
 
-      {/* Main Content */}
       <div className='px-4 sm:px-6 lg:px-8 pb-20'>
         <div className='max-w-7xl mx-auto'>
           {loader ? (
@@ -147,15 +139,13 @@ const Admin = () => {
                       className='flex flex-col w-sm max-w-sm items-center rounded-xl shadow-lg shadow-gray-500 py-5 px-4 bg-white break-words'
                       key={userItem.id_user}
                     >
-                      {/* Ajuste del grid para mejor visualización */}
-                      <div className='grid grid-cols-2 gap-x-4 gap-y-4 w-full'> {/* Aumentado el gap-x */}
+                      <div className='grid grid-cols-2 gap-x-4 gap-y-4 w-full'>
                         <div className='flex flex-col items-center text-center'>
                           <p className='text-xl font-bold'>Nombre</p>
                           <p>{userItem.name} {userItem.lastname}</p>
                         </div>
                         <div className='flex flex-col items-center text-center'>
                           <p className='text-xl font-bold'>Email</p>
-                          {/* Clase `break-all` o `break-words` para el email largo */}
                           <p className='break-all'>{userItem.email}</p>
                         </div>
                         <div className='col-span-2 flex flex-col items-center text-center'>
@@ -164,7 +154,6 @@ const Admin = () => {
                         </div>
                       </div>
 
-                      {/* Menú Acciones */}
                       <div className="relative mt-3" ref={el => menuRefs.current[userItem.id_user] = el}>
                         <button
                           className='border-2 border-purple-500 rounded-xl p-3 hover:bg-purple-500 hover:text-white transition duration-300'
@@ -215,7 +204,6 @@ const Admin = () => {
         </div>
       </div>
 
-      {/* Modal de confirmación - Responsive */}
       {showConfirm && selectedUser && (
         <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 p-4">
           <div className="bg-white rounded-lg shadow-2xl max-w-md w-full mx-4 p-6">

@@ -9,7 +9,7 @@ const Vaccination = () => {
     const { id } = useParams();
     const { getVaccination, loading } = useAnimals();
     const { user } = useAuth();
-    const { deleteVaccination, loading: adminLoading } = useAdmin();
+    const { deleteVaccination } = useAdmin();
     const [vaccinations, setVaccination] = useState([]);
     const [showConfirm, setShowConfirm] = useState(false);
     const [selectedVaccinationId, setSelectedVaccinationId] = useState(null);

@@ -1,10 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useAuth } from '../hooks/Auth/useAuth';
 
 const Home = () => {
-  const { user } = useAuth();
-  console.log(user)
   return (
     <>
         <div className='flex justify-center xl:justify-evenly mt-20 items-center px-4'>

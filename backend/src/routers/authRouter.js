@@ -5,16 +5,9 @@ import { changePassword } from '../controllers/userController.js';
 
 const router = express.Router();
 
-// rutas de autenticacion
-// /login, register, logout
-
 router.post('/login', login);
 router.post('/register', register);
 router.post('/logout', logout);
 router.post('/change-password', authMiddleware, changePassword);
-
-
-// aqui tengo q añadir las rutas que falta (logear con google)
-router.get("/checkout")
 
 export default router;

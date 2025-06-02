@@ -11,17 +11,17 @@ const NewAnimal = () => {
     name: '',
     species: '',
     race: '',
-    age: '',
+    birthdate: '',
     photo: null,
   });
   const [previewImage, setPreviewImage] = useState(null);
 
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
-    const newPhoto = type === 'file' ? files[0] : value;
+    const newValue = type === 'file' ? files[0] : value;
     setFormData((prev) => ({
       ...prev,
-      [name]: newPhoto,
+      [name]: newValue,
     }));
 
     if (type === 'file' && files && files[0]) {
@@ -30,7 +30,7 @@ const NewAnimal = () => {
         setPreviewImage(reader.result);
       };
       reader.readAsDataURL(files[0]);
-    } else {
+    } else if (type === 'file') {
       setPreviewImage(null); // Clear preview when no image is selected
     }
   };
@@ -61,6 +61,7 @@ const NewAnimal = () => {
             required
             className="w-full px-4 py-2 border rounded-lg"
             onChange={handleChange}
+            value={formData.name}
           />
           <input
             type="text"
@@ -68,6 +69,7 @@ const NewAnimal = () => {
             placeholder="Especie"
             className="w-full px-4 py-2 border rounded-lg"
             onChange={handleChange}
+            value={formData.species}
           />
           <input
             type="text"
@@ -75,18 +77,19 @@ const NewAnimal = () => {
             placeholder="Raza"
             className="w-full px-4 py-2 border rounded-lg"
             onChange={handleChange}
+            value={formData.race}
           />
           <input
-            type="number"
-            name="age"
-            placeholder="Edad"
+            type="date"
+            name="birthdate"
+            placeholder="Fecha de nacimiento"
             className="w-full px-4 py-2 border rounded-lg"
             onChange={handleChange}
+            value={formData.birthdate}
           />
           <input
             type="file"
             name="photo"
-            // accept="image/*"
             className="w-full px-4 py-2 border rounded-lg"
             onChange={handleChange}
           />

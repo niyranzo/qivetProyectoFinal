@@ -12,7 +12,6 @@ const upload = multer(); // default uses memory storage
 
 router.get('/animal/:id_animal', getByid_animal);
 router.get('/:id_diagnostic', getByDiagnosticId);
-// router.post('/', upload.fields([{ name: 'report_pdf' }, { name: 'image' }]), createDiagnostic);
 router.post('/', createDiagnostic);
 router.delete('/:id_diagnostic', deleteDiagnostic);
 

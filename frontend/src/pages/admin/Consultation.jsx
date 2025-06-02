@@ -81,9 +81,7 @@ const Consultation = () => {
                 hasNextVisit: false,
             });
             setNextVisitDateObj(null);
-            // Si la creación de la consulta implica nuevas fechas reservadas,
-            // sería bueno volver a cargar las fechas aquí.
-            // Opcional: fetchInitialData(); si la lógica lo requiere.
+           
         }
     };
 
@@ -352,7 +350,6 @@ const Consultation = () => {
                                             </span>
                                         </div>
                                         <button
-                                            // className="text-white bg-green-600  rounded-lg hover:bg-green-700 transition-all duration-300 transform hover:scale-105 text-sm whitespace-nowrap"
                                             className="px-4 py-2 rounded-lg bg-green-600  text-white hover:bg-aquamarine hover:text-black transition duration-300 whitespace-nowrap"
 
                                             onClick={() => handleApplyVaccine(v.id_vaccine)}

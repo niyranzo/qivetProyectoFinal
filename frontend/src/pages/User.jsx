@@ -5,18 +5,13 @@ import { useAnimals } from '../hooks/Animal/useAnimal';
 const API_URL = import.meta.env.VITE_API_URL; // Asegúrate de que esta variable de entorno esté configurada
 
 const User = () => {
-  // Destructuramos `user`, `loading` (renombrado a authLoading) y `changePassword` del AuthContext
   const { user, loading: authLoading, changePassword } = useAuth();
-  // Destructuramos `animals` y `loading` (renombrado a animalsLoading) del AnimalContext
   const { animals, loading: animalsLoading } = useAnimals();
 
-  // Estado para controlar la visibilidad del modal de cambio de contraseña
   const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
-  // Estados para los campos del formulario de cambio de contraseña
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
-  // Estados para mensajes de error y éxito del formulario
   const [passwordError, setPasswordError] = useState('');
   const [passwordSuccess, setPasswordSuccess] = useState('');
   // Estados para controlar la visibilidad de las contraseñas
@@ -24,18 +19,13 @@ const User = () => {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  // Efecto para verificar si el usuario necesita cambiar la contraseña al cargar el componente
   useEffect(() => {
-    // Si la autenticación ha terminado de cargar (no authLoading)
-    // y hay un usuario logueado
-    // y el atributo `changePassword` del usuario es true
     if (!authLoading && user && user.changePassword) {
-      setShowChangePasswordModal(true); // Mostrar el modal
+      setShowChangePasswordModal(true); 
     } else if (!authLoading && user && !user.changePassword) {
-      // Si el usuario ya no necesita cambiar la contraseña (ha cambiado con éxito o no lo necesitaba)
-      setShowChangePasswordModal(false); // Asegurarse de que el modal esté oculto
+      setShowChangePasswordModal(false); 
     }
-  }, [authLoading, user]); // Dependencias: se ejecuta cuando authLoading o user cambian
+  }, [authLoading, user]); 
 
   // Función de validación para la nueva contraseña
   const validatePassword = (password) => {
@@ -52,15 +42,15 @@ const User = () => {
 
   // Manejador para el envío del formulario de cambio de contraseña
   const handlePasswordChange = async (e) => {
-    e.preventDefault(); // Prevenir el comportamiento por defecto del formulario
-    setPasswordError(''); // Limpiar errores previos
-    setPasswordSuccess(''); // Limpiar mensajes de éxito previos
+    e.preventDefault(); 
+    setPasswordError(''); 
+    setPasswordSuccess(''); 
 
     // Validar la nueva contraseña con la función auxiliar
     const newPasswordValidation = validatePassword(newPassword);
     if (newPasswordValidation) {
-      setPasswordError(newPasswordValidation); // Mostrar el error de validación
-      return; // Detener la ejecución si hay un error
+      setPasswordError(newPasswordValidation); 
+      return; 
     }
 
     // Verificar que la nueva contraseña y la confirmación coincidan
@@ -73,23 +63,19 @@ const User = () => {
       // Llamar a la función `changePassword` del AuthContext
       await changePassword(oldPassword, newPassword);
       setPasswordSuccess("Contraseña actualizada exitosamente."); // Mensaje de éxito
-      // Limpiar los campos del formulario
       setOldPassword('');
       setNewPassword('');
       setConfirmNewPassword('');
-      // Resetear la visibilidad de las contraseñas
       setShowOldPassword(false);
       setShowNewPassword(false);
       setShowConfirmPassword(false);
-      setShowChangePasswordModal(false); // ¡Cerrar el modal al éxito!
+      setShowChangePasswordModal(false);
     } catch (error) {
-      // Capturar y mostrar errores de la API
       const errorMessage = error.response?.data?.message || "Error al cambiar la contraseña.";
       setPasswordError(errorMessage);
     }
   };
 
-  // Si el usuario (del AuthContext) aún está cargando o no existe, mostrar un spinner
   if (authLoading || !user) {
     return (
       <div className='mt-40 flex justify-center items-center h-screen'>
@@ -111,7 +97,6 @@ const User = () => {
           <hr className='bg-gradient-to-r from-pinkLigth to-aquamarine h-2 border-0 rounded-2xl w-60 sm:w-80 lg:w-100'/>
         </div>
         
-        {/* User Data Card */}
         <div className='flex flex-col items-center justify-center rounded-xl shadow-lg shadow-gray-500 px-6 sm:px-12 lg:px-20 py-4 lg:py-2 w-full max-w-sm lg:max-w-none lg:w-auto order-2 lg:order-2'>
           <p className='border-b-2 border-b-aquamarine px-4 text-xl sm:text-2xl lg:text-3xl font-bold mb-3 text-center'>Tus Datos</p>
           <div className='text-center lg:text-left'>
@@ -125,15 +110,12 @@ const User = () => {
         </div>
       </div>
 
-      {/* Pets Section */}
       <div className='flex flex-col items-center mt-10'>
         <p className='w-full max-w-md text-xl sm:text-2xl font-bold text-center mt-10 border-b-2 border-b-aquamarine pb-2'>Tus Mascotas</p>
         <div className="mt-10 flex justify-evenly w-full mb-10 flex-wrap gap-10">
-          {/* Mostrar spinner mientras se cargan las mascotas */}
           {animalsLoading ? (
             <Spinner />
           ) : animals && animals.length > 0 ? (
-            // Si hay mascotas, mapearlas y mostrarlas
             animals.map((animal) => (
               <Link to={`/animal/${animal.id_animal}`}
                 key={animal.id_animal}
@@ -151,13 +133,11 @@ const User = () => {
               </Link>
             ))
           ) : (
-            // Si no hay mascotas y no está cargando
             <p className="text-xl text-gray-600 text-center w-full">No tienes mascotas registradas.</p>
           )}
         </div>
       </div>
 
-      {/* Modal de Cambio de Contraseña - Responsive */}
       {showChangePasswordModal && (
         <div className="fixed inset-0 bg-black/30 flex justify-center items-center z-50 px-4">
           <div className="bg-white p-4 sm:p-6 rounded-lg shadow-lg text-center w-full max-w-sm sm:max-w-md lg:max-w-lg">
@@ -235,8 +215,6 @@ const User = () => {
               >
                 Cambiar Contraseña
               </button>
-              {/* No incluimos un botón de "Cancelar" aquí porque el cambio es forzado para `changePassword: true`.
-                  El usuario debe cambiar la contraseña para poder interactuar con el resto del sitio. */}
             </form>
           </div>
         </div>

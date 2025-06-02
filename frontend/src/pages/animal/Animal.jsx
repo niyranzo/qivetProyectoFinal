@@ -10,10 +10,8 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 const Animal = () => {
   const { id } = useParams();
-  // Asegúrate de que getLastDayConsulting devuelva un objeto de consulta o null/undefined.
   const { getAnimal, loading, getLastDayConsulting, setNextVisitDate } = useAnimals();
   const [pet, setPet] = useState({});
-  // Cambiado de [] a null, ya que esperamos un objeto de consulta individual o nada.
   const [consultation, setConsultation] = useState(null); 
   const [showNextVisitForm, setShowNextVisitForm] = useState(false);
   const [selectedVisitDate, setSelectedVisitDate] = useState(null);
@@ -56,7 +54,7 @@ const Animal = () => {
     fetchPet();
     fetchConsultation();
     fetchReservedDates();
-  }, [id, getAnimal, getLastDayConsulting]); // Agrega id y las funciones como dependencias
+  }, [id, getAnimal, getLastDayConsulting]);
 
   // Función para manejar el envío del formulario de próxima visita
   const handleSetNextVisitDate = async () => {
@@ -70,11 +68,9 @@ const Animal = () => {
 
       if (result && result.consultation) {
         toast.success(`Turno solicitado para ${selectedVisitDate.toLocaleString('es-ES', { dateStyle: 'medium', timeStyle: 'short' })}`);
-        setConsultation(result.consultation); // Actualiza la consulta con la nueva fecha de próxima visita
-        setShowNextVisitForm(false); // Cierra el formulario
-        setSelectedVisitDate(null); // Limpia la fecha seleccionada
-        // Opcional: Volver a cargar las fechas reservadas para reflejar el nuevo turno
-        // fetchReservedDates(); 
+        setConsultation(result.consultation); 
+        setShowNextVisitForm(false); 
+        setSelectedVisitDate(null); 
       } else {
         toast.error(result.error || "Error al solicitar el turno");
       }
@@ -91,9 +87,7 @@ const Animal = () => {
       ) : (
         <>
           <div className='flex flex-col justify-center'>
-            {/* Pet Header Section - Responsive */}
             <div className='flex flex-col lg:flex-row justify-center items-center gap-8 lg:gap-20 mb-8'>
-              {/* Pet Info Section */}
               <div className='flex flex-col items-center justify-center order-2 lg:order-1'>
                 <div className='flex flex-col items-center justify-center mb-5'>
                   <h1 className='text-3xl sm:text-4xl lg:text-5xl font-bold mb-2 text-center'>{pet?.name}</h1>
@@ -107,8 +101,8 @@ const Animal = () => {
                       <p className='text-sm sm:text-base text-center'>{pet.species}</p>  
                     </div>
                     <div className='flex flex-col items-center'>
-                      <p className='text-lg sm:text-xl font-bold'>Edad</p>
-                      <p className='text-sm sm:text-base text-center'>{pet.age}</p>
+                      <p className='text-lg sm:text-xl font-bold text-center'>Fecha de Nacimiento</p>
+                      <p className='text-sm sm:text-base text-center'>{pet.birthday}</p>
                     </div>
                     <div className='sm:col-span-2 flex flex-col items-center'>
                       <p className='text-lg sm:text-xl font-bold'>Raza</p>
@@ -118,7 +112,6 @@ const Animal = () => {
                 </div>
               </div>
               
-              {/* Pet Photo */}
               <div
                 style={{
                   backgroundImage: `url(${API_URL + pet.photo})`,
@@ -129,7 +122,6 @@ const Animal = () => {
               ></div>
             </div>
 
-            {/* Next Visit Section */}
             <div className='flex justify-center mb-8'>
               <div className='bg-white rounded-xl w-full max-w-md sm:max-w-lg lg:w-xl shadow-md p-4 sm:p-6'>
                 <div className='flex justify-center border-b border-purple-400 pb-2 mb-4 font-semibold'>
@@ -149,7 +141,6 @@ const Animal = () => {
                       : 'Sin Fecha'}
                   </span>
                 </div>
-                {/* Solo muestra el botón si consultation existe y nextVisitDate es null */}
                 {consultation && consultation.nextVisitDate === null && (
                   <button
                     className='w-full border border-purple-500 rounded-md py-2 sm:py-3 text-sm sm:text-base text-purple-600 font-semibold hover:bg-purple-600 hover:text-white transition'
@@ -158,7 +149,6 @@ const Animal = () => {
                     Pedir Turno
                   </button>
                 )}
-                {/* Si consultation es null (sin consultas previas) también se podría mostrar el botón */}
                 {!consultation && (
                     <button
                         className='w-full border border-purple-500 rounded-md py-2 sm:py-3 text-sm sm:text-base text-purple-600 font-semibold hover:bg-purple-600 hover:text-white transition'
@@ -170,14 +160,12 @@ const Animal = () => {
               </div>
             </div>
 
-            {/* Consultation Options */}
             <h2 className='relative text-xl sm:text-2xl lg:text-3xl font-bold text-center inline-block mx-auto my-8 sm:my-15'>
               ¿Qué quieres consultar?
               <span className='block absolute left-1/2 -bottom-2 h-0.5 w-32 sm:w-40 -translate-x-1/2 bg-aquamarine'></span>
               <span className='block absolute left-1/2 -bottom-4 h-0.5 w-20 sm:w-24 -translate-x-1/2 bg-purple-600'></span>
             </h2>
             
-            {/* Action Buttons - Responsive Grid */}
             <div className='flex flex-col sm:flex-row sm:flex-wrap lg:flex-nowrap justify-center items-center gap-4 sm:gap-6 lg:gap-8 mb-16 px-4'>
               <Link
                 to={`/animal/${id}/diagnostic`}
@@ -200,7 +188,6 @@ const Animal = () => {
             </div>
           </div>
 
-          {/* Modal para pedir turno - Responsive */}
           {showNextVisitForm && (
             <div className='fixed inset-0 bg-black/30 flex justify-center items-center z-50 px-4'>
               <div className='bg-white p-4 sm:p-6 rounded-lg shadow-lg text-center w-full max-w-sm sm:max-w-md lg:max-w-lg'>
@@ -251,7 +238,7 @@ const Animal = () => {
 
                 <div className='flex flex-col sm:flex-row justify-center gap-4 mt-4'>
                   <button
-                    onClick={handleSetNextVisitDate} // Usamos la función separada
+                    onClick={handleSetNextVisitDate} 
                     className='w-full sm:w-auto bg-green-600 text-white px-4 py-2 sm:py-3 rounded hover:bg-green-700 text-sm sm:text-base'
                   >
                     Confirmar
@@ -259,7 +246,7 @@ const Animal = () => {
                   <button
                     onClick={() => {
                         setShowNextVisitForm(false);
-                        setSelectedVisitDate(null); // Limpiar al cancelar
+                        setSelectedVisitDate(null); 
                     }}
                     className='w-full sm:w-auto bg-gray-400 text-white px-4 py-2 sm:py-3 rounded hover:bg-gray-500 text-sm sm:text-base'
                   >

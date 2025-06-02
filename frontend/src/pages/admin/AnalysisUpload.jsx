@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom';
 import { FaFilePdf, FaImage } from 'react-icons/fa';
 import { useAnimals } from '../../hooks/Animal/useAnimal';
 
-const API_URL = import.meta.env.VITE_API_URL;
 const AnalysisUpload = () => {
   const { id: id_animal } = useParams();
   const { uploadAnalysisFiles } = useAdmin();

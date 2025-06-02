@@ -12,17 +12,17 @@ const API_URL = import.meta.env.VITE_API_URL;
 const Appointments = () => {
     const [reservedDates, setReservedDates] = useState([]);
     const [selectedDate, setSelectedDate] = useState(new Date());
-    const { deleteAppointment, loading } = useAdmin(); // Renombrar loading de admin para evitar conflictos
-    const [componentLoading, setComponentLoading] = useState(true); // Estado de carga local del componente
+    const { deleteAppointment, loading } = useAdmin(); 
+    const [componentLoading, setComponentLoading] = useState(true); 
     const [showConfirm, setShowConfirm] = useState(false);
-    const [selectedAppointmentId, setSelectedAppointmentId] = useState(null); // Para guardar el ID de la cita a borrar
+    const [selectedAppointmentId, setSelectedAppointmentId] = useState(null); 
 
     const fetchReservedDates = async () => {
         setComponentLoading(true);
         try {
             const response = await fetch(`${API_URL}consultation/animal/reserved-dates`, {
                 method: 'GET',
-                credentials: 'include', // Asumo que usas cookies para la sesión/autenticación
+                credentials: 'include',
             });
 
             if (!response.ok) {
@@ -36,7 +36,7 @@ const Appointments = () => {
             console.error('Error fetching reserved dates:', err);
             toast.error('Error al cargar las citas.');
         } finally {
-            setComponentLoading(false); // Usar el loading local
+            setComponentLoading(false);
         }
     };
 
@@ -51,8 +51,8 @@ const Appointments = () => {
         console.log("entra");
         try {
             await deleteAppointment(selectedAppointmentId);
-            toast.success("Cita eliminada exitosamente."); // O un mensaje más específico si lo necesitas
-            await fetchReservedDates(); // Volver a cargar las citas para actualizar la vista
+            toast.success("Cita eliminada exitosamente."); 
+            await fetchReservedDates();
         } catch (error) {
             console.error("Error al eliminar la cita:", error);
             toast.error("Error al eliminar la cita.");
@@ -70,7 +70,7 @@ const Appointments = () => {
 
     useEffect(() => {
         fetchReservedDates();
-    }, []); // No hay dependencias aquí, solo se carga una vez al montar
+    }, []); 
 
     const tileClassName = ({ date, view }) => {
         if (view === 'month') {
@@ -92,25 +92,18 @@ const Appointments = () => {
         setSelectedDate(date);
     };
 
-    // Unir los estados de carga
-    if (componentLoading || loading) {
-        return (
-            <div className="mt-40 flex justify-center items-center h-full">
-                <Spinner />
-            </div>
-        );
-    }
-
     return (
+        <>
+         {loading ? (
+            <Spinner />
+         ) : (
         <div className='mt-40 flex flex-col items-center px-4'>
-            {/* Page Title Section */}
             <div className='flex flex-col items-center w-full justify-center my-16'>
                 <h1 className='text-5xl font-bold mb-4 text-center'>Próximas Citas</h1>
                 <hr className='bg-gradient-to-r from-pinkLigth to-aquamarine h-2 border-0 rounded-2xl w-1/2' />
             </div>
 
             <div className='flex flex-col lg:flex-row gap-6'>
-                {/* Calendar Section */}
                 <div className='bg-white shadow-md rounded-xl p-6 w-full max-w-xl mb-20 flex justify-center'>
                     <Calendar
                         onChange={onDateChange}
@@ -120,13 +113,11 @@ const Appointments = () => {
                     />
                 </div>
 
-                {/* Appointments for Selected Date Section */}
                 <div className='w-full max-w-xl mb-20 flex flex-col items-center justify-center p-6'>
                     <h2 className='text-3xl font-bold mb-4 text-center border-b-1 border-aquamarine pb-2'>
                         Citas para el {format(selectedDate, 'dd MMMM', { locale: es })}
                     </h2>
                     {
-                        // Filtra las citas para la fecha seleccionada
                         reservedDates
                             .filter(appointment =>
                                 format(new Date(appointment.date), 'yyyy-MM-dd') === format(selectedDate, 'yyyy-MM-dd')
@@ -156,7 +147,6 @@ const Appointments = () => {
                 </div>
             </div>
 
-            {/* Confirmation Modal */}
             {showConfirm && (
                 <div className="fixed inset-0 bg-black/30 flex justify-center items-center z-50">
                     <div className="bg-white p-6 rounded-lg shadow-lg text-center">
@@ -181,6 +171,8 @@ const Appointments = () => {
                 </div>
             )}
         </div>
+         )}
+        </>
     );
 };
 

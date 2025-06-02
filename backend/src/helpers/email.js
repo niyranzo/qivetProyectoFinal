@@ -6,7 +6,7 @@ dotenv.config();
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: "qivetlacaleratfg@gmail.com", // debe ser qivetlacaleratfg@gmail.com
+    user: "qivetlacaleratfg@gmail.com", 
     pass: "gjpy usuk egvw eeui"  // contraseña de aplicación
   }
 });

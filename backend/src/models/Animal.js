@@ -28,8 +28,8 @@ const Animal = sequelize.define('Animal', {
   race: {
     type: DataTypes.STRING(50)
   },
-  age: {
-    type: DataTypes.INTEGER
+  birthday: {
+    type: DataTypes.DATEONLY
   }
 }, {
   tableName: 'Animals',
