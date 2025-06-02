@@ -37,7 +37,7 @@ const pdfsPath = path.join(rootPath, 'public/pdfs');
 // Middlewares
 app.use(cookieParser());
 app.use(cors({
-    origin: 'https://qivetproyectofinal-production.up.railway.app/',
+    origin: 'https://qivetproyectofinal-production.up.railway.app',
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
