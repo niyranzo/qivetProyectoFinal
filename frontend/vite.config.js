@@ -4,14 +4,16 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: './', 
+  base: './',
   plugins: [react(), tailwindcss()],
-    server: {
-      host: '0.0.0.0',
-      port: 5173,
-      watch: {
-        usePolling: true,
-      },
+  server: {
+    host: '0.0.0.0',
+    port: 5173, // Este puerto es para desarrollo local, Railway usará su variable PORT
+    watch: {
+      usePolling: true,
     },
+    allowedHosts: [
+      'qivetproyectofinal-production.up.railway.app' // <--- ¡Agrégalo aquí!
+    ]
+  },
 })
-    
