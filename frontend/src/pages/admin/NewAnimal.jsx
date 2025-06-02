@@ -66,6 +66,7 @@ const NewAnimal = () => {
           <input
             type="text"
             name="species"
+            required
             placeholder="Especie"
             className="w-full px-4 py-2 border rounded-lg"
             onChange={handleChange}
@@ -75,22 +76,27 @@ const NewAnimal = () => {
             type="text"
             name="race"
             placeholder="Raza"
+            required
             className="w-full px-4 py-2 border rounded-lg"
             onChange={handleChange}
             value={formData.race}
           />
+          <p>Fecha de Nacimiento</p>
           <input
             type="date"
             name="birthdate"
             placeholder="Fecha de nacimiento"
             className="w-full px-4 py-2 border rounded-lg"
+            required
             onChange={handleChange}
             value={formData.birthdate}
           />
+          <p>Foto de la mascota</p>	
           <input
             type="file"
             name="photo"
             className="w-full px-4 py-2 border rounded-lg"
+            required
             onChange={handleChange}
           />
           {previewImage && (
