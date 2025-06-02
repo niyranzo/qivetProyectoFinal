@@ -3,6 +3,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import fs from 'fs';
 import { initDatabase } from './config/db.js';
 
 import userRouter from "./routers/userRouter.js";
@@ -22,10 +23,21 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename); 
 const rootPath = path.resolve(__dirname, '../');
 
+// 🔧 Crear carpetas necesarias si no existen
+const imagesPath = path.join(rootPath, 'public/images');
+const pdfsPath = path.join(rootPath, 'public/pdfs');
+
+[imagesPath, pdfsPath].forEach((dir) => {
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+    console.log(`📁 Carpeta creada: ${dir}`);
+  }
+});
+
 // Middlewares
 app.use(cookieParser());
 app.use(cors({
-    origin: 'https://qivetproyectofinal-production.up.railway.app',
+    origin: 'https://qivetproyectofinal-production.up.railway.app/',
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
