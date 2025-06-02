@@ -25,7 +25,7 @@ const rootPath = path.resolve(__dirname, '../');
 // Middlewares
 app.use(cookieParser());
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://qivetproyectofinal-production.up.railway.app/',
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
