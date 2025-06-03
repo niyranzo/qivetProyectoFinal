@@ -104,7 +104,7 @@ const Animal = () => {
                     </div>
                     <div className='flex flex-col items-center'>
                       <p className='text-lg sm:text-xl font-bold text-center'>Fecha de Nacimiento</p>
-                      <p className='text-sm sm:text-base text-center'>{pet.birthdate}</p>
+                      <p className='text-sm sm:text-base text-center'>{pet.birthday}</p>
                     </div>
                     <div className='sm:col-span-2 flex flex-col items-center'>
                       <p className='text-lg sm:text-xl font-bold'>Raza</p>
