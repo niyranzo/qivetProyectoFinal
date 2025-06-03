@@ -14,7 +14,7 @@ export default defineConfig({
     },
     proxy: {
       '/api': {
-        target: 'https://qivetproyectofinal-frontend-production.up.railway.app',
+        target: 'qivetproyectofinal-frontend-production.up.railway.app',
         changeOrigin: true,
         secure: false,
         credentials: 'include'
