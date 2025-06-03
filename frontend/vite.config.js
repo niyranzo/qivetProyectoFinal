@@ -8,12 +8,12 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
     host: '0.0.0.0',
-    port: 5173, // Este puerto es para desarrollo local, Railway usará su variable PORT
+    port: 5173, 
     watch: {
       usePolling: true,
     },
     allowedHosts: [
-      'qivetproyectofinal-production.up.railway.app' // <--- ¡Agrégalo aquí!
+      'qivetproyectofinal-production.up.railway.app' 
     ]
   },
 })
