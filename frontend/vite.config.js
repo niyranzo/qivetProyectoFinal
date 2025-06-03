@@ -12,8 +12,13 @@ export default defineConfig({
     watch: {
       usePolling: true,
     },
-    allowedHosts: [
-      'qivetproyectofinal-frontend-production.up.railway.app' 
-    ]
+    proxy: {
+      '/api': {
+        target: 'https://qivetproyectofinal-frontend-production.up.railway.app',
+        changeOrigin: true,
+        secure: false,
+        credentials: 'include'
+      }
+    }
   },
 })
