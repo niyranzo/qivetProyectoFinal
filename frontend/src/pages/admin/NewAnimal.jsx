@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAdmin } from '../../hooks/Admin/useAdmin';
+import { FiArrowLeft } from 'react-icons/fi';  
+import BackButton from '../../components/BackButton';
 
 const NewAnimal = () => {
   const { id } = useParams();
@@ -49,6 +51,7 @@ const NewAnimal = () => {
 
   return (
     <div className="flex items-center justify-center m-20 mt-50 flex-col">
+      <BackButton/>
       <h2 className="text-3xl font-bold text-center text-gray-900">Registrar Mascota</h2>
       <hr className='bg-gradient-to-r from-pinkLigth to-aquamarine h-2 border-0 rounded-2xl w-70 md:w-100 mt-5'/>
 
@@ -81,7 +84,7 @@ const NewAnimal = () => {
             onChange={handleChange}
             value={formData.race}
           />
-          <p>Fecha de Nacimiento</p>
+          <p className='m-0'>Fecha de Nacimiento:</p>
           <input
             type="date"
             name="birthdate"
@@ -91,12 +94,12 @@ const NewAnimal = () => {
             onChange={handleChange}
             value={formData.birthdate}
           />
-          <p>Foto de la mascota</p>	
+          <p className='m-0'>Imagen de la Mascota:</p>
           <input
             type="file"
             name="photo"
-            className="w-full px-4 py-2 border rounded-lg"
             required
+            className="w-full px-4 py-2 border rounded-lg"
             onChange={handleChange}
           />
           {previewImage && (

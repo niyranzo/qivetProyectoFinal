@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAdmin } from '../../hooks/Admin/useAdmin';
+import BackButton from '../../components/BackButton';
 
 const Edit = () => {
   const { id } = useParams();
@@ -47,6 +48,7 @@ const Edit = () => {
 
   return (
     <div className="flex items-center justify-center m-20 mt-50 flex-col">
+      <BackButton/>
       <h2 className="text-3xl font-bold text-center text-gray-900">Editar Usuario</h2>
       <hr className='bg-gradient-to-r from-pinkLigth to-aquamarine h-2 border-0 rounded-2xl w-100 mt-5'/>
 

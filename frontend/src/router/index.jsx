@@ -22,6 +22,7 @@ import DiagnosisUpload from "../pages/admin/DiagnosisUpload";
 import AnalysisUpload from "../pages/admin/AnalysisUpload";
 import History from "../pages/admin/History";
 import Appointments from "../pages/admin/Appoinments";
+import PublicRouter from "../components/PublicRouter";
 // const url = import.meta.env.VITE_API_URL;
 // const pokemonUrl = import.meta.env.VITE_POKEMON;
 
@@ -35,25 +36,24 @@ export const router = createBrowserRouter([
             {
                 path: ROUTES.HOME, // === "/"
                 element: 
-                // <ProtectedRoute admin={false}>
+                <PublicRouter>
                     <Home />
-                // </ProtectedRoute>
+                </PublicRouter>
             },
             {
                 path: ROUTES.CONTACT, 
                 element:
-                // <ProtectedRoute admin={false}>
+                <PublicRouter>
                     <Contact />
-                // </ProtectedRoute>
+                </PublicRouter>
                 
             },
             {
                 path: ROUTES.LOGIN, 
-                element: <Login />
-            },
-            {
-                path: ROUTES.LOGIN, 
-                element: <Login />
+                element: 
+                <PublicRouter>
+                    <Login />
+                </PublicRouter>
             },
             {
                 path: ROUTES.ADMIN, 

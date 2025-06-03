@@ -5,6 +5,7 @@ import { useAuth } from '../../hooks/Auth/useAuth';
 import { useAdmin } from '../../hooks/Admin/useAdmin';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import BackButton from '../../components/BackButton';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -226,6 +227,7 @@ const Consultation = () => {
 
     return (
         <div className="mt-40 flex flex-col items-center px-4 py-10">
+            <BackButton/>
             <h1 className="text-5xl font-bold mb-4 text-center">Gestión de Consultas y Vacunas</h1>
             <hr className='bg-gradient-to-r from-pinkLigth to-aquamarine h-2 border-0 rounded-2xl w-1/2 mb-12' />
 

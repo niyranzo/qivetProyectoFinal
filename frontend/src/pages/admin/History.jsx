@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useAdmin } from '../../hooks/Admin/useAdmin';
 import { Link, useParams } from 'react-router-dom';
 import Spinner from '../../components/Spinner';
+import BackButton from '../../components/BackButton';
 
 const History = () => {
   const { id } = useParams();
@@ -27,9 +28,10 @@ const History = () => {
           <Spinner />
         </>
       ) : (
-
       <div className="container mx-auto p-4 md:p-6 lg:p-8 mt-40">
+
           <div className='flex flex-col items-center mb-5'>
+          <BackButton/>
               <h1 className="text-3xl md:text-4xl font-bold mb-1 text-center text-gray-800">
                   Historial Clínico del Animal
               </h1>

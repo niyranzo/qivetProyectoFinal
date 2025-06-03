@@ -3,6 +3,7 @@ import { useAdmin } from '../../hooks/Admin/useAdmin';
 import { Link, useParams } from 'react-router-dom';
 import Spinner from '../../components/Spinner';
 import { toast } from 'react-toastify';
+import BackButton from '../../components/BackButton';
 const API_URL = import.meta.env.VITE_API_URL;
 
 const UserAnim = () => {
@@ -78,6 +79,7 @@ const UserAnim = () => {
       ) : (
         <>
           <div className='flex justify-center flex-col items-center'>
+            <BackButton/>
             <div className='flex flex-col items-center justify-center'>
               <h1 className='flex font-bold text-5xl mb-5 text-center'>Gestionar Mascotas</h1>
               <hr className='bg-gradient-to-r from-pinkLigth to-aquamarine h-2 border-0 rounded-2xl w-100' />
