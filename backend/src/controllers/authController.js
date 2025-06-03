@@ -67,9 +67,13 @@ const register = async (req, res) => {
 const logout = (req, res) => {
     res.cookie("token", "", {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
+        secure: true,
+        sameSite: 'none',
         maxAge: 0,
+        domain: '.railway.app',
+        path: '/' // Importante especificar el path
     });
+    
     res.json({ message: "Cierre de sesión exitoso" });
 };
 
