@@ -13,7 +13,7 @@ const NewAnimal = () => {
     name: '',
     species: '',
     race: '',
-    birthdate: '',
+    birthday: '',
     photo: null,
   });
   const [previewImage, setPreviewImage] = useState(null);
@@ -87,12 +87,12 @@ const NewAnimal = () => {
           <p className='m-0'>Fecha de Nacimiento:</p>
           <input
             type="date"
-            name="birthdate"
+            name="birthday"
             placeholder="Fecha de nacimiento"
             className="w-full px-4 py-2 border rounded-lg"
             required
             onChange={handleChange}
-            value={formData.birthdate}
+            value={formData.birthday}
           />
           <p className='m-0'>Imagen de la Mascota:</p>
           <input

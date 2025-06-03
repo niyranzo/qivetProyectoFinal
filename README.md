@@ -47,13 +47,20 @@ QIVET es una aplicación web completa para la gestión de una clínica veterinar
 ## Instalación 📦
 
 ### 1. Clonar el repositorio
+
 ```bash
 git clone https://github.com/niyranzo/qivetProyectoFinal.git
 cd QIVET-TFG
 ```
 
+**Para despliegue local:** Si deseas ejecutar el proyecto en tu entorno local, utiliza la rama específicamente configurada para ello:
+
+```bash
+git checkout local
+```
+
 ### 2. Configurar variables de entorno
-    
+   
 #### Backend (.env)
 ```env
 DB_HOST=postgres
@@ -62,6 +69,7 @@ DB_NAME=qivet_db
 DB_USER=admin
 DB_PASSWORD=admin
 JWT_SECRET=tu_secreto_jwt_seguro
+RESEND_API_KEY =re_26dPtUZc_QFGGLTQjrPnvBUqv4q2RS7gF
 ```
 
 #### Frontend (.env)
@@ -70,29 +78,50 @@ VITE_API_URL=http://localhost:3000/api/
 ```
 
 ### 3. Iniciar con Docker
+
 ```bash
 docker-compose up -d
 ```
+
+## Roles de Usuario 👥
+
+### Administrador
+- **Email:** `admin@qivet.com`
+- **Contraseña:** `admin`
+- **Funciones:**
+  - Crear y gestionar usuarios
+  - Acceso completo a todas las funcionalidades del sistema
+  - Administración de mascotas de todos los usuarios
+  - Control total de citas y reportes
+
+### Usuario Estándar
+- **Creación:** Los usuarios son creados por el administrador
+- **Primer acceso:** Al crear un usuario, se envía automáticamente una contraseña temporal al email registrado
+- **Cambio obligatorio:** En el primer inicio de sesión, el usuario debe cambiar la contraseña temporal por una de su elección
+- **Funciones:**
+  - Gestión de sus propias mascotas
+  - Acceso a historiales médicos de sus mascotas
+  - Programación de citas
+  - Visualización de reportes de sus animales
 
 ## Estructura del Proyecto 📁
 
 ```
 QIVET-TFG/
 ├── backend/
-│   ├── src/
-│   │   ├── controllers/
-│   │   ├── models/
-│   │   ├── routes/
-│   │   └── middleware/
-│   └── public/
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── hooks/
-│   │   └── context/
-│   └── public/
-└── docker-compose.yml
+│   └── src/
+│       ├── controllers/
+│       ├── models/
+│       ├── routes/
+│       ├── middleware/
+│       └── public/
+└── frontend/
+    └── src/
+        ├── components/
+        ├── pages/
+        ├── hooks/
+        ├── context/
+        └── public/
 ```
 
 ## Endpoints API 🔗
@@ -159,7 +188,7 @@ QIVET-TFG/
 
 ## Autor ✍️
 
-**Nicole Yranzo Ghisolfi    **
+**Nicole Yranzo Ghisolfi**
 
 ---
 
