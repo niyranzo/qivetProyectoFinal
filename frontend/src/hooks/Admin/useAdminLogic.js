@@ -326,6 +326,8 @@ export const useAdminLogic = () => {
     };
 
     const uploadAnalysisFiles = async (id, analysisPdf) => {
+        try {
+            
             let analysisPdfUrl = '';
 
             const formDataAnalysis = new FormData();
@@ -357,7 +359,13 @@ export const useAdminLogic = () => {
             toast.success("Análisis subido correctamente", {
                 style: { background: 'green', color: 'white' }
             });
-        } 
+        } catch (error) {
+            toast.error("Error al subir el análisis")
+            console.error(error.message);
+        } finally {
+            setLoading(false);
+        }
+    }
 
     const allConsultations = async (idAnimal) => {
         try {

@@ -4,6 +4,7 @@ import { useAnimals } from '../hooks/Animal/useAnimal';
 import { useAuth } from '../hooks/Auth/useAuth';import Spinner from '../components/Spinner';
 import { toast } from 'react-toastify';
 import { useAdmin } from '../hooks/Admin/useAdmin';
+import BackButton from '../components/BackButton';
 
 const Vaccination = () => {
     const { id } = useParams();
@@ -61,6 +62,7 @@ const Vaccination = () => {
 
     return (
         <div className='mt-40 flex flex-col items-center px-4'>
+            <BackButton/>
             <div className='flex flex-col items-center w-full justify-center my-16'>
                 <h1 className='text-5xl font-bold mb-4 text-center'>Vacunas</h1>
                 <hr className='bg-gradient-to-r from-pinkLigth to-aquamarine h-2 border-0 rounded-2xl w-1/2' />

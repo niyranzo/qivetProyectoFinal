@@ -5,6 +5,7 @@ import { useAdmin } from '../../hooks/Admin/useAdmin';
 import { useParams } from 'react-router-dom';
 import { FaFilePdf, FaImage } from 'react-icons/fa';
 import { useAnimals } from '../../hooks/Animal/useAnimal';
+import BackButton from '../../components/BackButton';
 
 
 const DiagnosisUpload = () => {
@@ -60,6 +61,7 @@ const DiagnosisUpload = () => {
 
   return (
     <div className='mt-50 bg-white rounded-lg shadow-md p-6 space-y-4 max-w-xl mx-auto'>
+      <BackButton/>
       <p className="font-semibold border-b-2 border-purple-400 pb-3 mb-4 text-3xl text-gray-800 flex flex-wrap">
         Añadir Diagnóstico - <p className='text-gray-500 ml-2'> { pet.name}</p></p>
 

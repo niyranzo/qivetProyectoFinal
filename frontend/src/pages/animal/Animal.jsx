@@ -5,6 +5,7 @@ import Spinner from '../../components/Spinner';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { toast } from 'react-toastify';
+import BackButton from '../../components/BackButton';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -86,7 +87,8 @@ const Animal = () => {
         <Spinner />
       ) : (
         <>
-          <div className='flex flex-col justify-center'>
+          <div className='flex flex-col justify-center items-center'>
+            <BackButton/>
             <div className='flex flex-col lg:flex-row justify-center items-center gap-8 lg:gap-20 mb-8'>
               <div className='flex flex-col items-center justify-center order-2 lg:order-1'>
                 <div className='flex flex-col items-center justify-center mb-5'>

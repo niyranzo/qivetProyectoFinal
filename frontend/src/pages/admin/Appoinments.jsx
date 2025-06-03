@@ -6,13 +6,14 @@ import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { toast } from 'react-toastify';
 import { useAdmin } from '../../hooks/Admin/useAdmin';
+import BackButton from '../../components/BackButton';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 const Appointments = () => {
     const [reservedDates, setReservedDates] = useState([]);
     const [selectedDate, setSelectedDate] = useState(new Date());
-    const { deleteAppointment, loading } = useAdmin(); 
+    const { deleteAppointment } = useAdmin(); 
     const [componentLoading, setComponentLoading] = useState(true); 
     const [showConfirm, setShowConfirm] = useState(false);
     const [selectedAppointmentId, setSelectedAppointmentId] = useState(null); 
@@ -48,7 +49,6 @@ const Appointments = () => {
 
     // Función que se llama cuando se confirma la eliminación
     const confirmDelete = async () => {
-        console.log("entra");
         try {
             await deleteAppointment(selectedAppointmentId);
             toast.success("Cita eliminada exitosamente."); 
@@ -94,10 +94,11 @@ const Appointments = () => {
 
     return (
         <>
-         {loading ? (
+         {componentLoading ? (
             <Spinner />
          ) : (
         <div className='mt-40 flex flex-col items-center px-4'>
+            <BackButton/>
             <div className='flex flex-col items-center w-full justify-center my-16'>
                 <h1 className='text-5xl font-bold mb-4 text-center'>Próximas Citas</h1>
                 <hr className='bg-gradient-to-r from-pinkLigth to-aquamarine h-2 border-0 rounded-2xl w-1/2' />

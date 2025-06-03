@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useAdmin } from '../../hooks/Admin/useAdmin';
 import { useNavigate } from 'react-router-dom';
 import Spinner from '../../components/Spinner';
+import BackButton from '../../components/BackButton';
 
 const Register = () => {
 
@@ -31,6 +32,7 @@ const Register = () => {
         <Spinner />
     ) : (
     <div className="flex items-center justify-center m-20 mt-50 flex-col">
+        <BackButton/>
         <h2 className="text-3xl font-bold text-center text-gray-900 ">Registrar Usuario</h2>
         <hr className='bg-gradient-to-r from-pinkLigth to-aquamarine h-2 border-0 rounded-2xl w-100 mt-5'/>
 
