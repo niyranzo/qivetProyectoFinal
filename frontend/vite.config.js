@@ -13,7 +13,7 @@ export default defineConfig({
       usePolling: true,
     },
     allowedHosts: [
-      'qivetproyectofinal-production.up.railway.app' 
+      'qivetproyectofinal-frontend-production.up.railway.app' 
     ]
   },
 })
