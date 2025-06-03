@@ -61,6 +61,12 @@ app.use('/api/analysis', analysisRouter);
 app.use('/api/consultation', consultationRouter);
 app.use('/api/upload', uploadRouter); 
 
+app.use(express.static(path.join(rootPath, 'frontend', 'dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(rootPath, 'frontend', 'dist', 'index.html'));
+});
+
 // Ruta base
 app.get('/', (req, res) => {
   res.send('API de Veterinaria funcionando');

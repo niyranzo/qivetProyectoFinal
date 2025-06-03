@@ -93,7 +93,7 @@ const Animal = () => {
               <div className='flex flex-col items-center justify-center order-2 lg:order-1'>
                 <div className='flex flex-col items-center justify-center mb-5'>
                   <h1 className='text-3xl sm:text-4xl lg:text-5xl font-bold mb-2 text-center'>{pet?.name}</h1>
-                  <hr className='bg-gradient-to-r from-pinkLigth to-aquamarine h-2 border-0 rounded-2xl w-60 sm:w-80 lg:w-100' />
+                  <hr className='bg-gradient-to-r from-pinfkLigth to-aquamarine h-2 border-0 rounded-2xl w-60 sm:w-80 lg:w-100' />
                 </div>
                 <div className='flex flex-col w-full max-w-md lg:w-lg items-center rounded-xl shadow-lg shadow-gray-500 py-4'>
                   <p className='border-b-2 border-b-purple-600 px-4 text-xl sm:text-2xl lg:text-3xl font-bold mb-5'>Mis Datos</p>
@@ -104,7 +104,7 @@ const Animal = () => {
                     </div>
                     <div className='flex flex-col items-center'>
                       <p className='text-lg sm:text-xl font-bold text-center'>Fecha de Nacimiento</p>
-                      <p className='text-sm sm:text-base text-center'>{pet.birthday}</p>
+                      <p className='text-sm sm:text-base text-center'>{pet.birthdate}</p>
                     </div>
                     <div className='sm:col-span-2 flex flex-col items-center'>
                       <p className='text-lg sm:text-xl font-bold'>Raza</p>
