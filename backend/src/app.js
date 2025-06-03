@@ -61,10 +61,10 @@ app.use('/api/analysis', analysisRouter);
 app.use('/api/consultation', consultationRouter);
 app.use('/api/upload', uploadRouter); 
 
-app.use(express.static(path.join(rootPath, 'frontend', 'dist')));
+app.use(express.static(path.join(rootPath, 'dist')));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(rootPath, 'frontend', 'dist', 'index.html'));
+  res.sendFile(path.join(rootPath, 'dist', 'index.html'));
 });
 
 // Ruta base
