@@ -71,7 +71,7 @@ const Admin = () => {
   });
 
   return (
-    <div className='min-h-screen bg-gray-50 mt-20 md:mt-0'>
+    <div className='min-h-screen mt-20 md:mt-0'>
       <div className='pt-20 sm:pt-24 md:pt-32 lg:pt-40 px-4 sm:px-6 lg:px-8'>
         <div className='max-w-7xl mx-auto'>
           <div className='text-center mb-6 sm:mb-8'>
