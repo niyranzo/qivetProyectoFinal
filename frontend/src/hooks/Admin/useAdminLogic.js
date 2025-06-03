@@ -153,7 +153,7 @@ export const useAdminLogic = () => {
             name: data.name,
             species: data.species,
             race: data.race,
-            age: parseInt(data.age),
+            birthday: data.birthday,
             photo: imageUrl
             };
             console.log(animalData)
