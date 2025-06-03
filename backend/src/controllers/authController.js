@@ -18,12 +18,21 @@ const login = async (req, res) => {
         
         res.cookie("token", token, {
             httpOnly: true,
-            secure: true,
-            maxAge: 10800000, 
-            sameSite: "none"
+            secure: true, // Para HTTPS
+            sameSite: 'none', // Importante para cross-site
+            maxAge: 10800000,
+            domain: '.railway.app' // Dominio principal
         });
-        // Eliminar la contraseña del objeto de usuario antes de enviarlo
-        res.json({ message: "Inicio de sesión exitoso", user: user});
+
+        const userWithoutPassword = {
+            ...user.toJSON(),
+            password: undefined
+        };
+
+        res.json({ 
+            message: "Inicio de sesión exitoso", 
+            user: userWithoutPassword
+        });
     } catch (error) {
         console.error(error);
         res.status(400).json({ message: "Error en el inicio de sesión" });

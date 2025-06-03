@@ -8,12 +8,14 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
     host: '0.0.0.0',
-    port: 5173, 
+    port: 5173,
     watch: {
       usePolling: true,
     },
-    allowedHosts: [
-      'qivetproyectofinal-frontend-production.up.railway.app' 
-    ]
+    cors: {
+      origin: ['https://qivetproyectofinal-frontend-production.up.railway.app'],
+      credentials: true,
+      allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
+    }
   },
 })

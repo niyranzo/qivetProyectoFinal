@@ -30,32 +30,26 @@ export const useAuthLogic = () => {
 
   const login = async ({ email, password }) => {
     try {
-      const response = await fetch(`${API_URL}auth/login`, {
-        method: 'POST',
-        headers: { 'Content-type': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify({ email, password })
-      });
+        const response = await fetch(`${API_URL}auth/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+            body: JSON.stringify({ email, password })
+        });
 
-      if (!response.ok) {
-        if (response.status === 401) {
-          setError("Credenciales incorrectas. Intenta de nuevo.");
-          toast.error("Credenciales incorrectas.", { style: { background: 'red', color: 'white' } });
-        } else {
-          setError("Problema al iniciar sesión.");
-          toast.error("Problema al iniciar sesión.", { style: { background: 'red', color: 'white' } });
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Error en el inicio de sesión');
         }
-        return;
-      }
 
-      const data = await response.json();
-      setUser(data.user);
-      toast.success(`Bienvenido ${data.user.name}`, { style: { background: 'purple', color: 'white' } });
-      return data.user;
-
+        const data = await response.json();
+        setUser(data.user);
+        return data.user;
     } catch (error) {
-      console.error("Error en login", error);
-      toast.error("Error al iniciar sesión.", { style: { background: 'red', color: 'white' } });
+        console.error("Error en login:", error);
+        throw error;
     }
   };
 
