@@ -10,11 +10,11 @@ const Contact = () => {
             <hr className='bg-gradient-to-l from-pinkLigth to-aquamarine h-2 border-0 rounded-2xl w-80 mt-6'/>
             <div className='text-center text-xl md:text-2xl mt-5'>
               <i class="fa-solid fa-envelope"></i>
-              <p className='mt-3'>example@gmail.com</p>
+              <p className='mt-3'>qivetlacaleratfg@gmail.com</p>
             </div>
             <div className='text-center text-xl md:text-2xl my-5'>
               <i class="fa-solid fa-phone"></i>
-              <p className='mt-3'>12343456567</p>
+              <p className='mt-3'>+54 662324932</p>
             </div>
             <p></p>
         </div>
